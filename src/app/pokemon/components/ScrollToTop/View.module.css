@@ -1,0 +1,54 @@
+.scrollTop {
+  all: unset;
+  box-sizing: border-box;
+  position: fixed;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  bottom: 30px;
+  right: 12px;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  padding-bottom: 3px;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  background-color: var(--background);
+  transform: translateY(100px);
+  transition: transform 250ms;
+  --radius: 10px;
+}
+
+.scrollTop::before,
+.scrollTop::after {
+  content: "";
+  box-sizing: border-box;
+  display: block;
+  width: 14px;
+  height: 24px;
+  border-style: solid;
+  border-width: 12px 7px;
+  transform: translateY(100px);
+  transition: transform 250ms 350ms var(--bounce);
+}
+
+.scrollTop::before {
+  border-color: transparent var(--accent) var(--accent) transparent;
+  border-radius: 0 0 var(--radius);
+}
+
+.scrollTop::after {
+  border-color: transparent transparent var(--accent) var(--accent);
+  border-radius: 0 0 0 var(--radius);
+}
+
+.scrollTop[data-display] {
+  transform: translateY(0);
+}
+
+.scrollTop[data-display]::before,
+.scrollTop[data-display]::after {
+  transform: translateY(0);
+}

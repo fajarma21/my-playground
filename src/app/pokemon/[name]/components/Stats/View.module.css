@@ -1,0 +1,21 @@
+.statsTable {
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+  border-spacing: 0px;
+  border: 1px solid var(--accent);
+  background: var(--background);
+}
+
+.statsTable tr:nth-child(odd) {
+  background: var(--accent);
+}
+
+.statsTable tr > th,
+.statsTable tr > td {
+  padding: 8px 16px;
+}
+.statsTable tr > th {
+  text-align: left;
+  text-transform: uppercase;
+}

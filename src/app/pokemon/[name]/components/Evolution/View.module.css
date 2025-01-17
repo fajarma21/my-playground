@@ -1,0 +1,67 @@
+.evoContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.evoRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: safe center;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.evoRow:not(:first-child) .evoWrapper:not(:first-child)::before,
+.evoRow:not(:first-child) .evoWrapper:not(:last-child)::before,
+.evoRow:not(:last-child) .evoWrapper::after {
+  content: "";
+}
+
+.evoWrapper {
+  scroll-snap-align: center;
+}
+
+.evoWrapper::before,
+.evoWrapper::after {
+  display: block;
+  height: 20px;
+  justify-self: center;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--accent);
+}
+
+.evoWrapper::before {
+  width: 100%;
+  border-width: 2px 0 0;
+  background-image: linear-gradient(
+    to right,
+    transparent calc(50% - 1px),
+    var(--accent) calc(50% - 1px),
+    var(--accent) calc(50% + 1px),
+    transparent calc(50% + 1px)
+  );
+}
+
+.evoWrapper:first-child::before,
+.evoWrapper:last-child::before {
+  width: 50%;
+  background: none;
+}
+
+.evoWrapper:first-child::before {
+  justify-self: flex-end;
+  border-top-left-radius: 8px;
+  border-width: 2px 0 0 2px;
+}
+.evoWrapper:last-child::before {
+  justify-self: flex-start;
+  border-top-right-radius: 8px;
+  border-width: 2px 2px 0 0;
+}
+
+.evoGap {
+  width: 100px;
+  min-width: 20px;
+  border-top: 2px solid var(--accent);
+}

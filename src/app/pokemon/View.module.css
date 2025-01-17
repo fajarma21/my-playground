@@ -1,0 +1,16 @@
+.pokemonContainer {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 12px;
+  list-style: none;
+}
+
+.pokemonContainer p {
+  text-transform: capitalize;
+}
+
+@media (min-width: 1024px) {
+  .pokemonContainer {
+    grid-template-columns: auto auto auto auto;
+  }
+}

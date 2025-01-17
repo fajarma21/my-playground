@@ -1,0 +1,57 @@
+.imgWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.imgWrapper::before {
+  content: "";
+  position: absolute;
+  display: block;
+  bottom: 10px;
+  left: 0;
+  height: 30%;
+  width: 100%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.imgWrapper img {
+  position: relative;
+  display: block;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.container > section {
+  margin-bottom: 32px;
+}
+
+.container h1,
+.container h2,
+.container h3 {
+  text-transform: capitalize;
+  margin-bottom: 16px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.reroll {
+  height: 16px;
+  width: 16px;
+  border: 2px solid #9e9eff;
+  border-width: 2px 0;
+  border-radius: 8px 2px;
+  transition: transform 250ms;
+}
+
+.reroll:active {
+  transform: rotate(180deg);
+}

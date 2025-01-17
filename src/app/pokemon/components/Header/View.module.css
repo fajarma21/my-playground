@@ -1,0 +1,26 @@
+@keyframes header {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.floatHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  background-color: #001e25d1;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(5px);
+  animation: header 250ms 1 forwards;
+}
+
+.headerImg {
+  display: block;
+  margin: 0 auto;
+}

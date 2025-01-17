@@ -1,0 +1,19 @@
+.thumbnail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  gap: 8px;
+  border: 2px solid var(--accent);
+  border-radius: 8px;
+}
+
+.thumbnail img {
+  flex: none;
+}
+
+.thumbnail p {
+  line-height: 20px;
+  text-transform: capitalize;
+}
