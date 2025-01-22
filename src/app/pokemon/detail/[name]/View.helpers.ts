@@ -1,4 +1,4 @@
-import { POKEMON_API } from "@/constants/url";
+import { POKEMON_API } from "@/app/pokemon/constants/url";
 import { PokemonSpeciesData } from "./View.types";
 
 export const getPokemonData = async (value: string) => {

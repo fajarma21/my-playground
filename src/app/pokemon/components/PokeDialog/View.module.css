@@ -1,0 +1,42 @@
+.dialog {
+  padding-top: 50px;
+  padding-bottom: 32px;
+  border: 2px solid var(--accent);
+  background-color: var(--background);
+}
+
+.dialogOverlay {
+  background-color: #001e25d1;
+}
+
+.container {
+  position: relative;
+}
+
+.imgModifier {
+  position: absolute;
+  top: -180px;
+  right: -32px;
+  filter: drop-shadow(20px -10px 0px var(--accent));
+}
+
+.title {
+  position: absolute;
+  top: -32px;
+  text-transform: capitalize;
+}
+
+.subTitle {
+  text-transform: capitalize;
+}
+
+.inner {
+  text-align: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--accent);
+}
+
+.inner > *:not(:last-child) {
+  margin-bottom: 16px;
+}

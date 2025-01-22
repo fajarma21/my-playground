@@ -1,24 +1,3 @@
-.imgWrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.imgWrapper::before {
-  content: "";
-  position: absolute;
-  display: block;
-  bottom: 10px;
-  left: 0;
-  height: 30%;
-  width: 100%;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
-}
-.imgWrapper img {
-  position: relative;
-  display: block;
-}
-
 .container {
   max-width: 500px;
   margin: 0 auto;

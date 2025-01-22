@@ -43,7 +43,7 @@ const Pokemon = () => {
                   <li key={item.name}>
                     <PokeThumbnail
                       imgSize={100}
-                      href={`${path}/${item.name}`}
+                      href={`${path}/detail/${item.name}`}
                       imgSrc={getImgFromSrc(item.url)}
                       priority={!index}
                       text={item.name}

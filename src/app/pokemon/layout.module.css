@@ -1,12 +1,20 @@
 .container {
   min-height: 100vh;
   padding: 12px;
-  background-image: url(../../assets/bg-light.png);
+  background: url(../../assets/bg-light.png) center;
+}
+
+.container h1 {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+  border-radius: 30px;
+  background-color: var(--accent);
 }
 
 @media (prefers-color-scheme: dark) {
   .container {
-    background-image: url(../../assets/bg-dark.png);
+    background: url(../../assets/bg-dark.png) center;
   }
 }
 
@@ -27,6 +35,5 @@
   padding: 4px 0;
   text-align: center;
   font-size: 0.8rem;
-  box-shadow: var(--shadow);
   background-color: var(--background);
 }

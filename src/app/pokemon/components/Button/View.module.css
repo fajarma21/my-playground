@@ -1,0 +1,18 @@
+.btnModifier {
+  all: unset;
+  cursor: pointer;
+  height: 40px;
+  padding: 0 16px;
+  display: inline-block;
+  border-radius: 20px;
+  color: white;
+  background-color: #6985e6;
+}
+
+.btnModifier b {
+  text-transform: capitalize;
+}
+
+.btnModifier[data-color="red"] {
+  background-color: #d87093;
+}

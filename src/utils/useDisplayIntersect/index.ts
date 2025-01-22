@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { UseDisplayIntersectParams } from "./index.types";
 
-const useDisplayIntersect = ({ options }: UseDisplayIntersectParams) => {
+const useDisplayIntersect = (options?: IntersectionObserverInit) => {
   const [intersecting, setIntersecting] = useState(false);
   const elementRef = useRef(null);
 

@@ -2,26 +2,25 @@
 
 import { MouseEvent, use, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 
 import TypeChip from "@/app/pokemon/components/TypeChip";
-import getPokemonImg from "@/app/pokemon/utils/getPokemonImg";
 import useIntersect from "@/utils/useIntersect";
 
+import Evolution from "./components/Evolution";
+import MainImage from "./components/MainImage";
 import Moves from "./components/Moves";
 import Stats from "./components/Stats";
-import styles from "./View.module.css";
 import {
   getPokemonData,
   getPokemonSpeciesData,
   randomDescription,
 } from "./View.helpers";
+import styles from "./View.module.css";
 import {
   PokemonData,
   PokemonDetailProps,
   PokemonSpeciesData,
 } from "./View.types";
-import Evolution from "./components/Evolution";
 
 const PokemonDetail = ({ params }: PokemonDetailProps) => {
   const { name } = use(params);
@@ -66,17 +65,9 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
 
   return (
     <>
-      <div className={styles.imgWrapper}>
-        <Image
-          priority
-          className={styles.imgModifier}
-          src={getPokemonImg(id)}
-          alt={name}
-          height={300}
-          width={300}
-        />
-      </div>
-      <div className={styles.container} onClick={() => console.log()}>
+      <MainImage id={id} name={name} />
+
+      <div className={styles.container}>
         <h1>{name}</h1>
         <section className={styles.row}>
           {types.map((item, index) => {

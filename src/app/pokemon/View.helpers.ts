@@ -1,4 +1,4 @@
-import { POKEMON_API } from "@/constants/url";
+import { POKEMON_API } from "@/app/pokemon/constants/url";
 
 import { GetPokemonListParams } from "./View.types";
 
