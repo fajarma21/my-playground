@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 import Button from "@/app/pokemon/components/Button";
 import Input from "@/app/pokemon/components/Input";
@@ -20,13 +20,20 @@ const OptionDialog = (props: OptionDialogProps) => {
     setInputValue(e.target.value);
   };
 
+  const handleSubmitNickname = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onEdit(inputValue);
+  };
+
   return (
     <PokeDialog {...props} name={displayName} subTitle={name}>
       {mode === "edit" ? (
         <>
           {nickname ? <p>Change the nickname?</p> : <p>Give it nickname?</p>}
-          <Input type="text" value={inputValue} onChange={handleChange} />
-          <Button onClick={() => onEdit(inputValue)}>
+          <form id="myform" onSubmit={handleSubmitNickname}>
+            <Input type="text" value={inputValue} onChange={handleChange} />
+          </form>
+          <Button type="submit" form="myform">
             {nickname && !inputValue
               ? "Remove the nickname"
               : nickname === inputValue

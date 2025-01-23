@@ -4,12 +4,13 @@ import React, { MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
 
-import { LS_POKEMON } from "../constants";
+import getFirstName from "@/app/pokemon/utils/getFirstName";
+import { COLLECTION_DEFAULT, LS_POKEMON } from "../constants";
 import getLS from "../utils/getLS";
 import setLS from "../utils/setLS";
+import getPokemonImg from "../utils/getPokemonImg";
 import { EditMode, PokeLS } from "../types";
 
-import getPokemonImg from "../utils/getPokemonImg";
 import OptionDialog from "./components/OptionDialog";
 import EmptyState from "./components/EmptyState";
 import styles from "./View.module.css";
@@ -17,13 +18,7 @@ import Link from "next/link";
 
 const Collections = () => {
   const [data, setData] = useState<PokeLS[]>([]);
-  const [selectedData, setSelectedData] = useState<PokeLS>({
-    id: 0,
-    name: "",
-    nickname: "",
-    queue: -1,
-    time: 0,
-  });
+  const [selectedData, setSelectedData] = useState<PokeLS>(COLLECTION_DEFAULT);
 
   const [displayDialog, setDisplayDialog] = useState(false);
   const [dialogMode, setDialogMode] = useState<EditMode>("");
@@ -76,7 +71,7 @@ const Collections = () => {
 
   return (
     <>
-      <h1>Collections</h1>
+      <h1>Collections ({data.length})</h1>
       {data.length ? (
         <ul className={styles.collections}>
           {data.map((item) => (
@@ -112,8 +107,8 @@ const Collections = () => {
                   width={100}
                   height={100}
                 />
-                <p>
-                  <b>{item.nickname || item.name}</b>
+                <p className={styles.name}>
+                  <b>{item.nickname || getFirstName(item.name)}</b>
                 </p>
                 <p>
                   <small>{dayjs(item.time).format("DD/MM/YY/ HH:mm:ss")}</small>
@@ -128,6 +123,7 @@ const Collections = () => {
 
       <OptionDialog
         {...selectedData}
+        name={getFirstName(selectedData.name)}
         display={displayDialog}
         mode={dialogMode}
         onClose={handleCloseDialog}

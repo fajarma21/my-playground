@@ -25,7 +25,7 @@ function PokemonLayout({
 }>) {
   const pathname = usePathname();
   const [catchNew, setCatchNew] = useState(false);
-  const { ref, display } = useDisplayIntersect();
+  const { ref, intersecting } = useDisplayIntersect();
 
   const isCollection = getCurrentPath(pathname) === "collections";
 
@@ -37,7 +37,7 @@ function PokemonLayout({
     <QueryClientProvider client={queryClient}>
       <CatchProvider onChangeCatchNew={handleChangeCatchNew}>
         <div className={styles.container}>
-          {display && <Header />}
+          {!intersecting && <Header />}
           <Link href="/pokemon">
             <Image
               ref={ref}
@@ -50,7 +50,7 @@ function PokemonLayout({
             />
           </Link>
           <div className={styles.content}>{children}</div>
-          <ScrollToTop display={display} />
+          <ScrollToTop display={!intersecting} />
           {!isCollection && (
             <Pokebag
               hasNew={catchNew}

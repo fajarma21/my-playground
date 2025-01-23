@@ -4,6 +4,7 @@ import { Fragment, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import IntersectSection from "@/components/IntersectSection";
+import getFirstName from "@/app/pokemon/utils/getFirstName";
 import PokeThumbnail from "@/app/pokemon/components/PokeThumbnail";
 import getImgFromSrc from "@/app/pokemon/utils/getImgFromUrl";
 
@@ -38,7 +39,7 @@ const Evolution = ({ url }: EvolutionProps) => {
                       imgSrc={getImgFromSrc(item.url)}
                       imgSize={100}
                       href={item.name}
-                      text={item.name}
+                      text={getFirstName(item.name)}
                       width={120}
                     />
                   </div>

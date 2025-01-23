@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import useIntersect from "@/utils/useIntersect";
+import getFirstName from "@/app/pokemon/utils/getFirstName";
 import getImgFromSrc from "@/app/pokemon/utils/getImgFromUrl";
 
 import PokeThumbnail from "@/app/pokemon/components/PokeThumbnail";
@@ -46,7 +47,7 @@ const Pokemon = () => {
                       href={`${path}/detail/${item.name}`}
                       imgSrc={getImgFromSrc(item.url)}
                       priority={!index}
-                      text={item.name}
+                      text={getFirstName(item.name)}
                     />
                   </li>
                 ))}

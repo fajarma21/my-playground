@@ -17,6 +17,7 @@ const PokeThumbnail = ({
   const style = {
     width: width ? fullWidth : "auto",
     height: width ? fullWidth : 180,
+    "--name-max": `${imgSize}px`,
   } as CSSProperties;
   return (
     <Link href={href} className={styles.thumbnail} style={style}>

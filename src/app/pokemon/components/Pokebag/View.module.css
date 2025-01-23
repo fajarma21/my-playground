@@ -34,9 +34,10 @@
   width: 16px;
   top: -10px;
   right: 4px;
+  padding-top: 1px;
   color: white;
-  background-color: palevioletred;
-  border-radius: 2px 2px 8px 8px;
+  background-color: #d87093;
+  border-radius: 8px 8px 8px 2px;
   animation: notif 140ms forwards;
 }
 

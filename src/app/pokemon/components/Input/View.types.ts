@@ -1,6 +1,6 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, InputHTMLAttributes } from "react";
 
-export interface InputProps {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   value: string;
   type: "text" | "number" | "search";

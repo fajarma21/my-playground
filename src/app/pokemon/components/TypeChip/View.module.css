@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   flex: none;
-  color: white;
+  color: var(--foreground);
   border-radius: 8px;
   padding: 0 12px;
   text-transform: capitalize;
@@ -17,6 +17,7 @@
 
 .chip[data-type] {
   border: none;
+  color: white;
 }
 .chip[data-type="grass"] {
   background-color: #92bf19;

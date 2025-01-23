@@ -58,15 +58,23 @@
   transform: scale(0);
 }
 
+.catched {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+
 .throwedPokeball {
   position: absolute;
-  left: calc(50% - 25px);
+  left: calc(50% - 20px);
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   transform: rotateZ(-30deg);
   animation: fall 250ms 300ms ease-in forwards, moving 1000ms 1000ms infinite;
 }

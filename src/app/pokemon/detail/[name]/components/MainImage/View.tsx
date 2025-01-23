@@ -11,7 +11,7 @@ import getPokemonImg from "@/app/pokemon/utils/getPokemonImg";
 import getLS from "@/app/pokemon/utils/getLS";
 import setLS from "@/app/pokemon/utils/setLS";
 import { PokeLS } from "@/app/pokemon/types";
-import { LS_POKEMON } from "@/app/pokemon/constants";
+import { COLLECTION_DEFAULT, LS_POKEMON } from "@/app/pokemon/constants";
 import { useCatchContext } from "@/app/pokemon/contexts/catch";
 
 import CatchDialog from "./components/CatchDialog";
@@ -30,17 +30,14 @@ const MainImage = ({ id, name }: MainImageProps) => {
   const [throwing, setThrowing] = useState(false);
   const [catchTime, setCatchTime] = useState(0);
   const [catchSuccess, setCatchSuccess] = useState(false);
+  const [isCatched, setIsCatched] = useState(false);
 
-  const [collectionData, setCollectionData] = useState<PokeLS>({
-    id: 0,
-    name: "",
-    nickname: "",
-    queue: 0,
-    time: 0,
-  });
+  const [collectionData, setCollectionData] =
+    useState<PokeLS>(COLLECTION_DEFAULT);
   const isCollection = Boolean(collectionData.id);
 
   const pokeStorage = useMemo(() => getLS<PokeLS[]>(LS_POKEMON) || [], []);
+  const catched = pokeStorage.some((item) => item.id === id);
 
   useEffect(() => {
     const numberCID = Number(cID);
@@ -55,6 +52,7 @@ const MainImage = ({ id, name }: MainImageProps) => {
     setCatchSuccess(false);
     setDisplayCatch(false);
     handleChangeCatchNew(true);
+    setIsCatched(true);
 
     const newData = {
       id,
@@ -110,6 +108,11 @@ const MainImage = ({ id, name }: MainImageProps) => {
           width={300}
           className={catchTime || catchSuccess ? styles.imgModifier : ""}
         />
+        {(isCatched || catched) && !isCollection && (
+          <div className={styles.catched} title="Already in collection">
+            <Pokeball />
+          </div>
+        )}
         {Boolean(catchTime) && (
           <div className={styles.throwedPokeball}>
             <Pokeball />

@@ -16,11 +16,18 @@
 
 .item p {
   text-align: left;
-  text-transform: capitalize;
 }
 
 .item small {
   color: #aaaaaa;
+}
+
+.name {
+  text-transform: capitalize;
+  width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .btnContainer {
@@ -126,7 +133,9 @@
   .collections {
     grid-template-columns: repeat(5, auto);
   }
+}
 
+@media (hover: hover) and (pointer: fine) {
   .item .btnContainer {
     display: none;
   }

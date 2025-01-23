@@ -22,7 +22,15 @@
   gap: 12px;
 }
 
+.descriptionContainer p {
+  margin-bottom: 8px;
+}
+.descriptionContainer p b {
+  text-transform: capitalize;
+}
+
 .reroll {
+  display: inline-block;
   height: 16px;
   width: 16px;
   border: 2px solid #9e9eff;

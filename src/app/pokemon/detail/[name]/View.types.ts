@@ -1,3 +1,5 @@
+import { randomDescription } from "./View.helpers";
+
 export interface PokemonDetailProps {
   params: Promise<{ name: string }>;
 }
@@ -28,9 +30,18 @@ export interface PokemonData {
   types?: TypesData[];
 }
 
+interface FlavorTextEntries {
+  flavor_text?: string;
+  version?: {
+    name?: string;
+  };
+}
+
 export interface PokemonSpeciesData {
   evolution_chain?: {
     url?: string;
   };
-  flavor_text_entries?: Array<{ flavor_text?: string }>;
+  flavor_text_entries?: FlavorTextEntries[];
 }
+
+export type Description = ReturnType<typeof randomDescription>;

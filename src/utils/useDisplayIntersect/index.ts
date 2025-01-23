@@ -25,7 +25,7 @@ const useDisplayIntersect = (options?: IntersectionObserverInit) => {
     };
   }, [options]);
 
-  return { ref: elementRef, display: !intersecting, intersecting };
+  return { ref: elementRef, intersecting };
 };
 
 export default useDisplayIntersect;
