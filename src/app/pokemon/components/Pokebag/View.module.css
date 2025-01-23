@@ -1,0 +1,73 @@
+@keyframes notif {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.pokebagWrap {
+  position: fixed;
+  z-index: 10;
+  left: 16px;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  background-color: var(--accent);
+}
+
+.inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notif {
+  position: absolute;
+  text-align: center;
+  height: 20px;
+  width: 16px;
+  top: -10px;
+  right: 4px;
+  padding-top: 1px;
+  color: white;
+  background-color: #d87093;
+  border-radius: 8px 8px 8px 2px;
+  animation: notif 140ms forwards;
+}
+
+.icon {
+  position: relative;
+  height: 18px;
+  width: 24px;
+  top: 3px;
+  border-radius: 60% 60% 40% 40%;
+  background: radial-gradient(#d87093 22%, #ffff9e 22%, #ffff9e) -12px 4px;
+}
+
+.icon::after,
+.icon::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 5px;
+  height: 10px;
+  top: -6px;
+  background-image: linear-gradient(to top, #ffff9e 60%, #2c2c2c 60%, #2c2c2c);
+}
+
+.icon::before {
+  border-radius: 5px 0 0;
+  transform: rotate(-30deg);
+}
+
+.icon::after {
+  right: 0;
+  border-radius: 0 5px 0 0;
+  transform: rotate(30deg);
+}

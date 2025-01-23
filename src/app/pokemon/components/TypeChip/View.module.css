@@ -17,6 +17,7 @@
 
 .chip[data-type] {
   border: none;
+  color: white;
 }
 .chip[data-type="grass"] {
   background-color: #92bf19;

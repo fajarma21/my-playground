@@ -1,20 +1,25 @@
 import Image from "next/image";
-import styles from "./page.module.css";
 import Link from "next/link";
+
+import pokemonLogo from "@/assets/logo-pokemon.png";
+
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Link href="pokemon">
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-      </Link>
+      <div className={styles.container}>
+        <Link href="pokemon" className={styles.link}>
+          <Image
+            priority
+            className={styles.logo}
+            src={pokemonLogo}
+            alt="pokemon"
+            width={212}
+            height={78}
+          />
+        </Link>
+      </div>
     </div>
   );
 }

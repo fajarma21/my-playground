@@ -1,0 +1,146 @@
+.collections {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 12px;
+  gap: 12px;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  padding: 12px;
+  border-radius: 50px 10px 50px 10px;
+  border: 2px solid var(--accent);
+  background-color: var(--background);
+}
+
+.item p {
+  text-align: left;
+}
+
+.item small {
+  color: #aaaaaa;
+}
+
+.name {
+  text-transform: capitalize;
+  width: 160px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.btnContainer {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.btnIcon {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 4px;
+  border-radius: 4px;
+}
+
+.releaseIcon,
+.editIcon {
+  position: relative;
+  width: 50%;
+  height: 50%;
+  opacity: 0.3;
+  --color: var(--foreground);
+}
+
+.releaseIcon {
+  transform: rotate(-30deg);
+}
+
+.releaseIcon::before,
+.releaseIcon::after,
+.editIcon::before,
+.editIcon::after {
+  content: "";
+  display: block;
+}
+
+.releaseIcon::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 72%;
+  height: 100%;
+  border-radius: 4px 2px 3px 4px;
+  background-image: linear-gradient(
+      to right,
+      var(--color) 16%,
+      transparent 16%,
+      transparent 26%,
+      var(--color) 26%,
+      var(--color) 42%,
+      transparent 42%,
+      transparent 52%,
+      var(--color) 52%,
+      var(--color) 68%,
+      transparent 68%,
+      transparent 78%,
+      var(--color) 78%
+    ),
+    linear-gradient(to bottom, transparent 50%, var(--color) 50%);
+}
+
+.releaseIcon::after {
+  position: absolute;
+  bottom: 0;
+  right: -8%;
+  width: 50%;
+  height: 20%;
+  background-color: var(--color);
+  border-radius: 0 4px 0px 2px;
+  transform-origin: bottom left;
+  transform: rotate(-30deg);
+}
+
+.editIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1px;
+  transform: rotate(30deg);
+}
+
+.editIcon::before {
+  width: 20%;
+  height: calc(80% - 1px);
+  background-color: var(--color);
+  border-radius: 2px 2px 1px 1px;
+}
+
+.editIcon::after {
+  width: 20%;
+  height: 20%;
+  background-color: var(--color);
+  border-radius: 0px 0px 2px 0px;
+}
+
+@media (min-width: 1024px) {
+  .collections {
+    grid-template-columns: repeat(5, auto);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .item .btnContainer {
+    display: none;
+  }
+
+  .item:hover .btnContainer {
+    display: block;
+  }
+}

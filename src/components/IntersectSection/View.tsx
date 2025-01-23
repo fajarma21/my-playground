@@ -4,9 +4,7 @@ import styles from "./View.module.css";
 import { IntersectSectionProps } from "./View.types";
 
 const IntersectSection = ({ children }: IntersectSectionProps) => {
-  const { ref, intersecting } = useDisplayIntersect({
-    options: { threshold: 0.3 },
-  });
+  const { ref, intersecting } = useDisplayIntersect({ threshold: 0.3 });
 
   return (
     <section ref={ref}>

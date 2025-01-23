@@ -2,32 +2,33 @@
 
 import { MouseEvent, use, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 
 import TypeChip from "@/app/pokemon/components/TypeChip";
-import getPokemonImg from "@/app/pokemon/utils/getPokemonImg";
+import getFirstName from "@/app/pokemon/utils/getFirstName";
 import useIntersect from "@/utils/useIntersect";
 
+import Evolution from "./components/Evolution";
+import MainImage from "./components/MainImage";
 import Moves from "./components/Moves";
 import Stats from "./components/Stats";
-import styles from "./View.module.css";
 import {
   getPokemonData,
   getPokemonSpeciesData,
   randomDescription,
 } from "./View.helpers";
+import styles from "./View.module.css";
 import {
+  Description,
   PokemonData,
   PokemonDetailProps,
   PokemonSpeciesData,
 } from "./View.types";
-import Evolution from "./components/Evolution";
 
 const PokemonDetail = ({ params }: PokemonDetailProps) => {
   const { name } = use(params);
 
   const [loadEvolution, setLoadEvolution] = useState(false);
-  const [selectedDesc, setSelectedDesc] = useState("");
+  const [selectedDesc, setSelectedDesc] = useState<Description>();
 
   const { data, isLoading, isError } = useQuery<PokemonData>({
     queryKey: ["pokemon"],
@@ -38,10 +39,11 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
 
   const { data: dataSpecies, isLoading: isLoadingSpecies } =
     useQuery<PokemonSpeciesData>({
-      queryKey: ["pokemon-species", [name]],
-      queryFn: () => getPokemonSpeciesData(name),
-      enabled: Boolean(name),
+      queryKey: ["pokemon-species", [id]],
+      queryFn: () => getPokemonSpeciesData(id),
+      enabled: Boolean(id),
     });
+
   const { evolution_chain, flavor_text_entries = [] } = dataSpecies || {};
   const { url = "" } = evolution_chain || {};
   const description = useMemo(
@@ -61,23 +63,17 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
 
   const { ref } = useIntersect({ callback: () => setLoadEvolution(true) });
 
+  const displayDescription = selectedDesc || description;
+
   if (isError) return <p>Something went wrong... Please try again.</p>;
   if (isLoading || isLoadingSpecies) return <p>Loading...</p>;
 
   return (
     <>
-      <div className={styles.imgWrapper}>
-        <Image
-          priority
-          className={styles.imgModifier}
-          src={getPokemonImg(id)}
-          alt={name}
-          height={300}
-          width={300}
-        />
-      </div>
-      <div className={styles.container} onClick={() => console.log()}>
-        <h1>{name}</h1>
+      <MainImage id={id} name={name} />
+
+      <div className={styles.container}>
+        <h1>{getFirstName(name)}</h1>
         <section className={styles.row}>
           {types.map((item, index) => {
             const { type } = item || {};
@@ -88,15 +84,18 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
               </TypeChip>
             );
           })}
-          {Boolean(description || selectedDesc) && (
-            <>
-              <p>{selectedDesc || description}</p>
+          {Boolean(displayDescription) && (
+            <div className={styles.descriptionContainer}>
+              <p>{displayDescription.flavor_text}</p>
+              <p>
+                <b>- Pokemon {displayDescription.version.name} -</b>
+              </p>
               <a
                 href="#!"
                 className={styles.reroll}
                 onClick={handleChangeDesc}
               />
-            </>
+            </div>
           )}
         </section>
 
