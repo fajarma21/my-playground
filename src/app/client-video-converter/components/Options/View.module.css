@@ -1,0 +1,9 @@
+.options {
+  width: 100%;
+  max-width: 300px;
+  padding: 16px;
+  border-radius: 20px;
+  color: black;
+  background-color: lightgray;
+  border-top: 4px solid var(--light);
+}

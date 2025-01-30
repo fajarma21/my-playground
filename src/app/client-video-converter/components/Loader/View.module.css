@@ -1,0 +1,23 @@
+@keyframes rotating {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.container {
+  text-align: center;
+  margin: 25% auto;
+}
+
+.loader {
+  display: inline-block;
+  margin-bottom: 25px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px dashed var(--light);
+  animation: rotating linear 10s infinite;
+}
