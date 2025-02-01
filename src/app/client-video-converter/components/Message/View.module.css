@@ -8,8 +8,8 @@
 }
 
 .messageContainer {
-  width: 100%;
-  max-width: 300px;
+  width: 500px;
+  height: 270px;
   padding: 16px;
   border-radius: 20px;
   background-color: lightgray;

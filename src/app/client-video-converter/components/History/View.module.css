@@ -1,0 +1,47 @@
+.historyContainer {
+  margin: 20px auto;
+  padding: 12px 24px;
+  width: 600px;
+  color: black;
+  border-radius: 8px;
+  background-color: #faf2d7;
+}
+
+.historyContainer table {
+  overflow: hidden;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid black;
+}
+
+.historyContainer table th {
+  background-color: lightgrey;
+}
+
+.historyContainer table th,
+.historyContainer table td {
+  text-align: center;
+  padding: 4px;
+}
+
+.expandBtn {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+}
+
+.overlay {
+  background-color: #001e25d1;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+}

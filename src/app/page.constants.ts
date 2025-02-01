@@ -1,4 +1,5 @@
 import pokemonLogo from "@/assets/logo-pokemon.png";
+import converterLogo from "@/assets/logo-converter.png";
 
 export const PAGES = [
   {
@@ -7,6 +8,6 @@ export const PAGES = [
   },
   {
     path: "client-video-converter",
-    img: pokemonLogo, // TODO: logo converter
+    img: converterLogo,
   },
 ];

@@ -28,7 +28,7 @@ const UploadBtn = ({ display, onChange }: UploadBtnProps) => {
           className={`${styles.videoBtn} ${styles.videoUpload}`}
           onClick={handleClick}
         >
-          <FaRegFolderOpen size={20} color="white" />
+          <FaRegFolderOpen size={20} color="white" aria-label="Open Video" />
         </button>
       )}
     </>

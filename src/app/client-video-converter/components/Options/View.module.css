@@ -1,9 +1,53 @@
 .options {
+  position: relative;
   width: 100%;
   max-width: 300px;
-  padding: 16px;
+  padding: 32px 16px 0;
   border-radius: 20px;
   color: black;
   background-color: lightgray;
   border-top: 4px solid var(--light);
+}
+
+.options::before {
+  content: attr(data-title);
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 100px;
+  top: -22px;
+  left: calc(50% - 50px);
+  padding: 8px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+  background-color: var(--light);
+}
+
+.options section {
+  display: grid;
+  grid-template-columns: 100px auto;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.options section:last-child {
+  margin: 0;
+}
+
+.options input,
+.options select {
+  width: 100%;
+}
+
+.multipleInput * {
+  margin-bottom: 8px;
+}
+.multipleInput *:last-child {
+  margin: 0;
+}
+
+.empty {
+  text-align: center;
 }

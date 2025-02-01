@@ -9,7 +9,13 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
+import {
+  HistoryData,
+  OptionData,
+  VideoData,
+} from "@/app/client-video-converter/types";
 import canUseDOM from "@/utils/canUseDOM";
+import getRoundNumber from "@/utils/getRoundNumber";
 
 import Options from "./components/Options";
 import Message from "./components/Message";
@@ -18,8 +24,10 @@ import ConvertContainer from "./components/ConvertContainer";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import UploadBtn from "./components/UploadBtn";
+import History from "./components/History";
+import Footer from "./components/Footer";
 
-import { getURLs, msToSecond } from "./View.helpers";
+import { generateCommand, getData, getFileName, getURLs } from "./View.helpers";
 import styles from "./View.module.css";
 
 const ClientVideoConverter = () => {
@@ -28,15 +36,28 @@ const ClientVideoConverter = () => {
   const [enableMT, setEnableMT] = useState(false);
   const [init, setInit] = useState(false);
   const [isReady, setIsReady] = useState(false);
+
+  const [videoFile, setVideoFile] = useState<File>();
+  const [originData, setOriginData] = useState<VideoData>();
+  const [resultData, setResultData] = useState<VideoData>();
+  const [history, setHistory] = useState<HistoryData[]>([]);
+
+  const [options, setOptions] = useState<OptionData>({
+    id: 0,
+    height: "",
+    width: "",
+    duration: "",
+    extension: "",
+    frameRate: "",
+  });
+
+  const [converting, setConverting] = useState(false);
   const [messages, setMessages] = useState<string[]>([]);
   const [progress, setProgress] = useState(0);
-  const [converting, setConverting] = useState(false);
-  const [videoFile, setVideoFile] = useState<File>();
-  const [videoURL, setVideoURL] = useState("");
-  const [videoResult, setVideoResult] = useState("");
   const [finishTime, setFinishTime] = useState(0);
 
-  const isFinished = progress >= 100 && Boolean(videoResult);
+  const { extension } = options;
+  const isFinished = progress >= 100 && Boolean(resultData);
 
   const load = useCallback(async () => {
     const ffmpeg = ffmpegRef.current;
@@ -65,31 +86,39 @@ const ClientVideoConverter = () => {
   const transcode = async (file: File) => {
     const ffmpeg = ffmpegRef.current;
     if (!ffmpeg) return;
+
     setConverting(true);
+
     const { name } = file;
     setMessages((prev) => [...prev, `----- start converting ${name} -----`]);
+
     try {
       const startTime = performance.now();
-      let endTime = 0;
 
+      const resultName = `${getFileName(name)}_output.${extension}`;
       await ffmpeg.writeFile(name, await fetchFile(file));
-      await ffmpeg.exec(["-i", name, "output.mp4"]);
-      const data = await ffmpeg.readFile("output.mp4");
+
+      const command = generateCommand(options);
+      await ffmpeg.exec(["-i", name, "-c:a", "copy", ...command, resultName]);
+      const data = await ffmpeg.readFile(resultName);
 
       if (typeof data !== "string") {
         const buffer = data.buffer as BlobPart;
-        const result = URL.createObjectURL(
-          new Blob([buffer], { type: "video/mp4" })
-        );
+        const outputFile = new File([buffer], resultName, {
+          type: `video/${extension}`,
+        });
+        const result = await getData(outputFile);
+
+        setResultData(result);
         setConverting(false);
-        setVideoResult(result);
         setMessages((prev) => [...prev, "----- finished -----"]);
 
-        endTime = performance.now();
+        const endTime = performance.now();
+        const timeSecond = (endTime - startTime) / 1000;
+        const time = getRoundNumber(timeSecond, 2);
+        setFinishTime(time);
+        setHistory((prev) => [{ ...result, convertDuration: time }, ...prev]);
       }
-
-      const time = msToSecond(endTime - startTime, 2);
-      setFinishTime(time);
     } catch (error) {
       setConverting(false);
       setProgress(0);
@@ -99,28 +128,36 @@ const ClientVideoConverter = () => {
         "----- terminated -----",
       ]);
     }
-    console.log();
   };
 
-  const handleInputFile = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files[0]) {
       setProgress(0);
-      setVideoResult("");
+      setResultData(undefined);
       setVideoFile(files[0]);
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        const videoUrl = reader.result;
-        if (typeof videoUrl === "string") setVideoURL(videoUrl);
-      };
-      reader.readAsDataURL(files[0]);
+      try {
+        const result = await getData(files[0]);
+        setOptions((prev) => ({
+          ...prev,
+          id: prev.id + 1,
+          height: `${result.height}`,
+          width: `${result.width}`,
+          duration: `${result.duration}`,
+          extension: "mp4",
+          frameRate: "",
+        }));
+        setOriginData(result);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
   const handleRemoveResult = () => {
     setProgress(0);
-    setVideoResult("");
+    setResultData(undefined);
   };
 
   const handleTranscode = () => {
@@ -128,6 +165,10 @@ const ClientVideoConverter = () => {
       handleRemoveResult();
       transcode(videoFile);
     }
+  };
+
+  const handleChangeOption = (data: OptionData) => {
+    setOptions(data);
   };
 
   useEffect(() => {
@@ -140,16 +181,14 @@ const ClientVideoConverter = () => {
     if (init) load();
   }, [init, load]);
 
-  // TODO: next detail video
-
   return (
-    <>
+    <div className={styles.outer}>
       <Header />
       <div className={styles.container}>
         {isReady ? (
           <div data-converting={converting || undefined}>
             <div className={styles.row}>
-              <VideoContainer title="Origin" videoURL={videoURL}>
+              <VideoContainer title="Origin" videoData={originData}>
                 <UploadBtn display={!converting} onChange={handleInputFile} />
               </VideoContainer>
 
@@ -164,32 +203,43 @@ const ClientVideoConverter = () => {
 
               <VideoContainer
                 title="Result"
-                videoURL={videoResult}
+                videoData={resultData}
                 onClickRemove={handleRemoveResult}
               >
-                {!videoResult && <p>{Math.round(progress)}%</p>}
-                {Boolean(videoResult) && (
+                {!resultData && <p>{Math.round(progress)}%</p>}
+                {Boolean(resultData) && (
                   <button
                     type="button"
                     data-control
                     className={`${styles.videoBtn} ${styles.videoRemove}`}
                     onClick={handleRemoveResult}
                   >
-                    <FaRegTrashCan size={20} color="white" />
+                    <FaRegTrashCan
+                      size={20}
+                      color="white"
+                      aria-label="Remove video result"
+                    />
                   </button>
                 )}
               </VideoContainer>
             </div>
             <div className={styles.bottomRow}>
               <Message messages={messages} />
-              <Options />
+              <Options
+                key={options.id}
+                display={Boolean(originData)}
+                data={options}
+                onChange={handleChangeOption}
+              />
             </div>
+            <History list={history} />
           </div>
         ) : (
           <Loader />
         )}
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 
