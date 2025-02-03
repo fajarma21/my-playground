@@ -1,0 +1,178 @@
+@keyframes processWire {
+  from {
+    opacity: 1;
+    left: -50px;
+  }
+  to {
+    opacity: 1;
+    left: 100%;
+  }
+}
+
+@keyframes blinking {
+  from {
+    background-image: radial-gradient(
+        circle at 40% 20px,
+        #d0d400 5%,
+        transparent 5%,
+        transparent
+      ),
+      radial-gradient(
+        circle at 60% 20px,
+        var(--light) 5%,
+        transparent 5%,
+        transparent
+      );
+  }
+  to {
+    background-image: radial-gradient(
+        circle at 40% 20px,
+        var(--light) 5%,
+        transparent 5%,
+        transparent
+      ),
+      radial-gradient(
+        circle at 60% 20px,
+        #d0d400 5%,
+        transparent 5%,
+        transparent
+      );
+  }
+}
+
+.helpContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.helpContainer::after {
+  content: "";
+  display: block;
+  width: 5px;
+  height: 10px;
+  background-color: var(--light);
+}
+
+.helpBtn {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: -1px;
+  border-radius: 50%;
+  background-color: var(--light);
+}
+
+.mode {
+  width: 75%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 8px 4px;
+  border-radius: 8px 8px 0 0;
+  color: white;
+  background-color: var(--light);
+}
+
+.finishedContainer {
+  text-align: center;
+}
+
+.finishedContainer b {
+  font-size: 1.5rem;
+}
+
+.buttonContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  background-image: radial-gradient(
+      circle at 40% 20px,
+      var(--light) 5%,
+      transparent 5%,
+      transparent
+    ),
+    radial-gradient(
+      circle at 60% 20px,
+      var(--light) 5%,
+      transparent 5%,
+      transparent
+    );
+  background-color: darkgray;
+  border-top: 4px solid var(--light);
+}
+
+[data-converting] .buttonContainer {
+  animation: blinking 1s linear infinite;
+}
+
+.buttonContainer::after {
+  content: "";
+  position: absolute;
+}
+
+.buttonContainer::after {
+  left: -50px;
+  width: 50px;
+  height: 5px;
+  opacity: 0;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--light),
+    var(--light) 10%,
+    transparent 10%,
+    transparent 20%
+  );
+}
+
+[data-converting] .buttonContainer::after {
+  animation: processWire 1s linear infinite;
+}
+
+.convertBtn {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  width: 120px;
+  height: 45px;
+  color: black;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 12px;
+  transition: all 250ms;
+  z-index: 1;
+}
+
+.convertBtn:disabled {
+  cursor: not-allowed;
+  color: gray;
+  background-color: lightgray;
+}
+
+[data-converting] .convertBtn {
+  cursor: progress;
+  height: 0;
+  padding: 0;
+  background: var(--light);
+}
+
+.dialog {
+  background-color: var(--background);
+}
+
+.dialog a {
+  color: #00d496;
+}
+
+.overlay {
+  background-color: #001e25d1;
+}

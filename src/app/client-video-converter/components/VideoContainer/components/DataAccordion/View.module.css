@@ -1,0 +1,64 @@
+.accordion {
+  pointer-events: auto;
+  position: absolute;
+  overflow: hidden;
+  top: calc(100% - 32px);
+  left: calc(50% - 100px);
+  width: 200px;
+  height: 23px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  background-color: #faf2d7;
+  transition: height 250ms;
+}
+
+.accordion[data-open] {
+  height: 158px;
+}
+
+.accordionHead {
+  all: unset;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 23px;
+  text-align: center;
+  padding: 4px 8px;
+}
+
+[data-open] .accordionHead {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.accordionBody {
+  padding: 8px;
+}
+
+.tableContent {
+  width: 100%;
+  border-spacing: 0;
+  border: 1px solid;
+}
+
+.tableContent tr td {
+  vertical-align: top;
+  padding: 4px;
+  border-width: 0 0 1px 1px;
+}
+
+.tableContent tr:last-child td {
+  border-width: 0 0 0 1px;
+}
+
+.tableContent tr td:first-child {
+  font-weight: bold;
+  background-color: lightgrey;
+  border-width: 0 0 1px 0;
+}
+
+.tableContent tr:last-child td:first-child {
+  border-width: 0;
+}
