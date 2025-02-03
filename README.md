@@ -6,6 +6,7 @@ Show list and pokemon details.
 - API from pokeapi.co
 
 ### 2. Client Video Converter
+Convert video in client side
 - CrossOrigin-isolated
 - ffmpeg.wasm
 
