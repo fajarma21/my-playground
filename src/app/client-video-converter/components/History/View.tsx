@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { FaEye } from "react-icons/fa6";
 
-import getRoundNumber from "@/utils/getRoundNumber";
 import { HistoryData } from "@/app/client-video-converter/types";
+import Dialog from "@/components/Dialog";
 
+import { getFormattedData } from "./View.helpers";
 import styles from "./View.module.css";
 import { HistoryProps } from "./View.types";
-import Dialog from "@/components/Dialog";
 
 const History = ({ list }: HistoryProps) => {
   const [display, setDisplay] = useState(false);
@@ -31,6 +31,7 @@ const History = ({ list }: HistoryProps) => {
               <th>Dimension</th>
               <th>Duration</th>
               <th>Bitrate</th>
+              <th>Frame Rate</th>
               <th>Size</th>
               <th>Convert Duration</th>
               <th>Video</th>
@@ -38,26 +39,35 @@ const History = ({ list }: HistoryProps) => {
           </thead>
           <tbody>
             {list.length ? (
-              list.map((item) => (
-                <tr key={item.url}>
-                  <td>
-                    {item.width}x{item.height}
-                  </td>
-                  <td>{getRoundNumber(item.duration, 2)} s</td>
-                  <td>{getRoundNumber(item.size / 1000, 2)} kb</td>
-                  <td>{getRoundNumber(item.kbps, 2)} Kbps</td>
-                  <td>{getRoundNumber(item.convertDuration, 2)} s</td>
-                  <td>
-                    <button
-                      type="button"
-                      className={styles.expandBtn}
-                      onClick={() => handleClick(item)}
-                    >
-                      <FaEye aria-label="Open video" />
-                    </button>
-                  </td>
-                </tr>
-              ))
+              list.map((item, index) => {
+                const {
+                  bitrate,
+                  convertDuration,
+                  dimension,
+                  duration,
+                  frameRate,
+                  size,
+                } = getFormattedData(item);
+                return (
+                  <tr key={`list-${index}`}>
+                    <td>{dimension}</td>
+                    <td>{duration}</td>
+                    <td>{bitrate}</td>
+                    <td>{frameRate}</td>
+                    <td>{size}</td>
+                    <td>{convertDuration}</td>
+                    <td>
+                      <button
+                        type="button"
+                        className={styles.expandBtn}
+                        onClick={() => handleClick(item)}
+                      >
+                        <FaEye aria-label="Open video" />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan={6}>No history</td>

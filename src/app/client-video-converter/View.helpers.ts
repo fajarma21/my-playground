@@ -35,9 +35,7 @@ const getRateData = (url: string, size: number): Promise<RateData> => {
       const bitrate = (size * 8) / media.duration;
       resolve({
         duration: media.duration,
-        bps: bitrate,
-        kbps: bitrate / 1000,
-        mbps: bitrate / 1000000,
+        bitrate: Math.round(bitrate),
       });
     };
     media.onerror = (error) => reject(getError("getRateData", error));
@@ -73,6 +71,7 @@ export const getData = (file: File): Promise<VideoData> => {
         extension: getExtension(name),
         size,
         url: videoUrl,
+        frameRate: 0,
       });
     };
     reader.readAsDataURL(file);

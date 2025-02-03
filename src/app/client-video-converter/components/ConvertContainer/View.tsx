@@ -65,8 +65,7 @@ const ConvertContainer = ({
         onClose={toggleDialog}
       >
         <p>
-          This threading-thing is depends on your browser{" "}
-          <b>crossOriginIsolated</b>.
+          This threading-thing is depends on <b>crossOriginIsolated</b> status.
         </p>
         <br />
         <p>

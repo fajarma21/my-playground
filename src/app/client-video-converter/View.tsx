@@ -36,6 +36,7 @@ const ClientVideoConverter = () => {
   const [enableMT, setEnableMT] = useState(false);
   const [init, setInit] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const [videoFile, setVideoFile] = useState<File>();
   const [originData, setOriginData] = useState<VideoData>();
@@ -56,7 +57,7 @@ const ClientVideoConverter = () => {
   const [progress, setProgress] = useState(0);
   const [finishTime, setFinishTime] = useState(0);
 
-  const { extension } = options;
+  const { extension, frameRate } = options;
   const isFinished = progress >= 100 && Boolean(resultData);
 
   const load = useCallback(async () => {
@@ -68,7 +69,7 @@ const ClientVideoConverter = () => {
       }
     });
     ffmpeg.on("progress", ({ progress: p }) => {
-      setProgress(p * 100);
+      setProgress(p > 100 ? 0 : p * 100);
     });
 
     const { coreURL, wasmURL, workerURL } = getURLs(enableMT);
@@ -107,17 +108,26 @@ const ClientVideoConverter = () => {
         const outputFile = new File([buffer], resultName, {
           type: `video/${extension}`,
         });
-        const result = await getData(outputFile);
 
+        if (outputFile.size < 100) throw new Error("Unknown Error");
+
+        const result = await getData(outputFile);
         setResultData(result);
         setConverting(false);
         setMessages((prev) => [...prev, "----- finished -----"]);
 
         const endTime = performance.now();
         const timeSecond = (endTime - startTime) / 1000;
-        const time = getRoundNumber(timeSecond, 2);
+        const time = getRoundNumber(timeSecond);
         setFinishTime(time);
-        setHistory((prev) => [{ ...result, convertDuration: time }, ...prev]);
+        setHistory((prev) => [
+          {
+            ...result,
+            convertDuration: time,
+            frameRate: Number(frameRate),
+          },
+          ...prev,
+        ]);
       }
     } catch (error) {
       setConverting(false);
@@ -127,6 +137,9 @@ const ClientVideoConverter = () => {
         `something went wrong: ${error}`,
         "----- terminated -----",
       ]);
+      setIsError(true);
+      ffmpegRef.current = new FFmpeg();
+      load();
     }
   };
 
@@ -206,7 +219,9 @@ const ClientVideoConverter = () => {
                 videoData={resultData}
                 onClickRemove={handleRemoveResult}
               >
-                {!resultData && <p>{Math.round(progress)}%</p>}
+                {!resultData && (
+                  <p>{isError ? "Error" : `${Math.round(progress)}%`}</p>
+                )}
                 {Boolean(resultData) && (
                   <button
                     type="button"

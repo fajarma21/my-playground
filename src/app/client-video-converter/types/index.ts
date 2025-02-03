@@ -5,13 +5,12 @@ export interface DimensionData {
 
 export interface RateData {
   duration: number;
-  bps: number;
-  kbps: number;
-  mbps: number;
+  bitrate: number;
 }
 
 export interface VideoData extends DimensionData, RateData {
   extension: string;
+  frameRate: number;
   size: number;
   url: string;
 }

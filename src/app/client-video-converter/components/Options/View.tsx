@@ -14,6 +14,9 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
     max?: number
   ) => {
     let value = e.target.value;
+    const onlyDigit = new RegExp(/\d/, "g");
+    if (!value.match(onlyDigit) || Number(value) <= 0) return;
+
     if (max) value = Number(value) > max ? String(max) : value;
 
     if (key === "height" || key === "width") {
