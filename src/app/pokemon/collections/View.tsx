@@ -4,10 +4,10 @@ import React, { MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
 
+import getLS from "@/utils/getLS";
+import setLS from "@/utils/setLS";
 import getFirstName from "@/app/pokemon/utils/getFirstName";
 import { COLLECTION_DEFAULT, LS_POKEMON } from "../constants";
-import getLS from "../utils/getLS";
-import setLS from "../utils/setLS";
 import getPokemonImg from "../utils/getPokemonImg";
 import { EditMode, PokeLS } from "../types";
 

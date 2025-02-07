@@ -5,11 +5,11 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
 
+import getLS from "@/utils/getLS";
+import setLS from "@/utils/setLS";
 import useDisplayIntersect from "@/utils/useDisplayIntersect";
 import Pokeball from "@/app/pokemon/components/Pokeball";
 import getPokemonImg from "@/app/pokemon/utils/getPokemonImg";
-import getLS from "@/app/pokemon/utils/getLS";
-import setLS from "@/app/pokemon/utils/setLS";
 import { PokeLS } from "@/app/pokemon/types";
 import { COLLECTION_DEFAULT, LS_POKEMON } from "@/app/pokemon/constants";
 import { useCatchContext } from "@/app/pokemon/contexts/catch";
