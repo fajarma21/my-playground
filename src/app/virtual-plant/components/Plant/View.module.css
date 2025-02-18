@@ -1,0 +1,11 @@
+.plantContainer {
+  position: relative;
+}
+
+.plant {
+  width: 30px;
+  height: calc(var(--stage) * 50px);
+  color: black;
+  background-color: antiquewhite;
+  transition: height 500ms;
+}

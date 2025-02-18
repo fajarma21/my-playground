@@ -1,0 +1,9 @@
+.leftSide {
+  position: fixed;
+  left: 0;
+  padding: 12px;
+}
+
+.leftSide > *:not(:last-child) {
+  margin-bottom: 8px;
+}

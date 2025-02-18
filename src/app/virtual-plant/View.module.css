@@ -1,0 +1,12 @@
+.container {
+  position: relative;
+  height: 100vh;
+  padding: 12px;
+}
+
+.plantWrapper {
+  position: absolute;
+  left: 50%;
+  bottom: 15vh;
+  transform: translateX(-50%);
+}
