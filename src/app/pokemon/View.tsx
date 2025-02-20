@@ -3,6 +3,7 @@
 import React, { Fragment } from "react";
 import { usePathname } from "next/navigation";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { motion } from "framer-motion";
 
 import useIntersect from "@/utils/useIntersect";
 import getFirstName from "@/app/pokemon/utils/getFirstName";
@@ -40,8 +41,19 @@ const Pokemon = () => {
           <>
             {pages.map((page, index) => (
               <Fragment key={`page-${index}`}>
-                {page.results.map((item) => (
-                  <li key={item.name}>
+                {page.results.map((item, index2) => (
+                  <motion.li
+                    key={item.name}
+                    initial={{
+                      opacity: 0,
+                      scale: 0.8,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      transition: { delay: index2 * 0.05 },
+                    }}
+                  >
                     <PokeThumbnail
                       imgSize={100}
                       href={`${path}/detail/${item.name}`}
@@ -49,7 +61,7 @@ const Pokemon = () => {
                       priority={!index}
                       text={getFirstName(item.name)}
                     />
-                  </li>
+                  </motion.li>
                 ))}
               </Fragment>
             ))}

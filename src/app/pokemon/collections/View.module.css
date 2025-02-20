@@ -1,6 +1,6 @@
 .collections {
   display: grid;
-  grid-template-columns: repeat(2, auto);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-gap: 12px;
   gap: 12px;
   list-style: none;
@@ -24,7 +24,6 @@
 
 .name {
   text-transform: capitalize;
-  width: 160px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -131,7 +130,7 @@
 
 @media (min-width: 1024px) {
   .collections {
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 

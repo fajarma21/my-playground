@@ -3,6 +3,7 @@
 import React, { MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
+import { AnimatePresence, motion } from "framer-motion";
 
 import getLS from "@/utils/getLS";
 import setLS from "@/utils/setLS";
@@ -74,48 +75,66 @@ const Collections = () => {
       <h1>Collections ({data.length})</h1>
       {data.length ? (
         <ul className={styles.collections}>
-          {data.map((item) => (
-            <li
-              key={item.time}
-              role="button"
-              tabIndex={0}
-              className={styles.item}
-            >
-              <Link href={`/pokemon/detail/${item.name}?c=${item.queue}`}>
-                <div className={styles.btnContainer}>
-                  <button
-                    type="button"
-                    title="Edit"
-                    className={styles.btnIcon}
-                    onClick={(e) => handleOpenEdit(e, "edit", item)}
-                  >
-                    <div className={styles.editIcon} />
-                  </button>
-                  <button
-                    type="button"
-                    title="Release"
-                    className={styles.btnIcon}
-                    onClick={(e) => handleOpenEdit(e, "release", item)}
-                  >
-                    <div className={styles.releaseIcon} />
-                  </button>
-                </div>
-                <Image
-                  priority
-                  src={getPokemonImg(item.id)}
-                  alt={String(item.time)}
-                  width={100}
-                  height={100}
-                />
-                <p className={styles.name}>
-                  <b>{item.nickname || getFirstName(item.name)}</b>
-                </p>
-                <p>
-                  <small>{dayjs(item.time).format("DD/MM/YY/ HH:mm:ss")}</small>
-                </p>
-              </Link>
-            </li>
-          ))}
+          <AnimatePresence>
+            {data.map((item, index) => (
+              <motion.li
+                key={item.time + item.name}
+                layout
+                role="button"
+                tabIndex={0}
+                className={styles.item}
+                initial={{
+                  opacity: 0,
+                  scale: 0.8,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  transition: { delay: index * 0.05 },
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.8,
+                }}
+              >
+                <Link href={`/pokemon/detail/${item.name}?c=${item.queue}`}>
+                  <div className={styles.btnContainer}>
+                    <button
+                      type="button"
+                      title="Edit"
+                      className={styles.btnIcon}
+                      onClick={(e) => handleOpenEdit(e, "edit", item)}
+                    >
+                      <div className={styles.editIcon} />
+                    </button>
+                    <button
+                      type="button"
+                      title="Release"
+                      className={styles.btnIcon}
+                      onClick={(e) => handleOpenEdit(e, "release", item)}
+                    >
+                      <div className={styles.releaseIcon} />
+                    </button>
+                  </div>
+                  <Image
+                    priority
+                    src={getPokemonImg(item.id)}
+                    alt={String(item.time)}
+                    width={100}
+                    height={100}
+                  />
+                  <p className={styles.name}>
+                    <b>{item.nickname || getFirstName(item.name)}</b>
+                  </p>
+                  <p>
+                    <small>
+                      {dayjs(item.time).format("DD/MM/YY/ HH:mm:ss")}
+                    </small>
+                  </p>
+                </Link>
+              </motion.li>
+            ))}
+          </AnimatePresence>
         </ul>
       ) : (
         <EmptyState />
