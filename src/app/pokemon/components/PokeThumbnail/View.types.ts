@@ -6,5 +6,6 @@ export interface PokeThumbnailProps {
   imgSrc: string | StaticImageData;
   priority?: boolean;
   text: string;
+  viewTransition?: string;
   width?: number;
 }

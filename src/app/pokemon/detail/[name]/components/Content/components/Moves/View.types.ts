@@ -1,4 +1,4 @@
-import { PokemonData } from "../../View.types";
+import { PokemonData } from "@/app/pokemon/types";
 
 export interface MovesProps {
   moves: NonNullable<PokemonData["moves"]>;

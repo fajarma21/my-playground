@@ -1,6 +1,11 @@
 "use client";
 
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, {
+  MouseEvent,
+  useEffect,
+  useState,
+  unstable_ViewTransition as ViewTransition,
+} from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { AnimatePresence, motion } from "framer-motion";
@@ -116,13 +121,15 @@ const Collections = () => {
                       <div className={styles.releaseIcon} />
                     </button>
                   </div>
-                  <Image
-                    priority
-                    src={getPokemonImg(item.id)}
-                    alt={String(item.time)}
-                    width={100}
-                    height={100}
-                  />
+                  <ViewTransition name={`${item.name}-thumbnail`}>
+                    <Image
+                      priority
+                      src={getPokemonImg(item.id)}
+                      alt={String(item.time)}
+                      width={100}
+                      height={100}
+                    />
+                  </ViewTransition>
                   <p className={styles.name}>
                     <b>{item.nickname || getFirstName(item.name)}</b>
                   </p>
