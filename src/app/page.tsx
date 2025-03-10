@@ -1,3 +1,5 @@
+import { unstable_ViewTransition as ViewTransition } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,14 +12,16 @@ export default function Home() {
       <div className={styles.container}>
         {PAGES.map(({ path, img }, index) => (
           <Link key={`link-${index}`} href={path} className={styles.link}>
-            <Image
-              priority
-              className={styles.logo}
-              src={img}
-              alt={path}
-              width={212}
-              height={78}
-            />
+            <ViewTransition name={`${path}-logo`}>
+              <Image
+                priority
+                className={styles.logo}
+                src={img}
+                alt={path}
+                width={212}
+                height={78}
+              />
+            </ViewTransition>
           </Link>
         ))}
       </div>

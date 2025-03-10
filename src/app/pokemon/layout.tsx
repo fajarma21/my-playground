@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, unstable_ViewTransition as ViewTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -39,15 +39,17 @@ function PokemonLayout({
         <div className={styles.container}>
           {!intersecting && <Header />}
           <Link href="/pokemon">
-            <Image
-              ref={ref}
-              priority
-              src={pokemonLogo}
-              alt="pokemon"
-              width={212}
-              height={78}
-              className={styles.titleImg}
-            />
+            <ViewTransition name="pokemon-logo">
+              <Image
+                ref={ref}
+                priority
+                src={pokemonLogo}
+                alt="pokemon"
+                width={212}
+                height={78}
+                className={styles.titleImg}
+              />
+            </ViewTransition>
           </Link>
           <div className={styles.content}>{children}</div>
           <ScrollToTop display={!intersecting} />

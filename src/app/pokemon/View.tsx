@@ -60,6 +60,7 @@ const Pokemon = () => {
                       imgSrc={getImgFromSrc(item.url)}
                       priority={!index}
                       text={getFirstName(item.name)}
+                      viewTransition={`${item.name}-thumbnail`}
                     />
                   </motion.li>
                 ))}
