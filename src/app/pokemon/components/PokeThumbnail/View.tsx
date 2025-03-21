@@ -1,10 +1,8 @@
-import React, {
-  CSSProperties,
-  unstable_ViewTransition as ViewTransition,
-} from "react";
+import React, { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import ThumbWrapper from "./components/ThumbWrapper";
 import styles from "./View.module.css";
 import { PokeThumbnailProps } from "./View.types";
 
@@ -25,18 +23,7 @@ const PokeThumbnail = ({
   } as CSSProperties;
   return (
     <Link href={href} className={styles.thumbnail} style={style}>
-      {viewTransition ? (
-        <ViewTransition name={viewTransition}>
-          <Image
-            src={imgSrc}
-            alt={text}
-            width={imgSize}
-            height={imgSize}
-            priority={priority}
-            loading={priority ? undefined : "lazy"}
-          />
-        </ViewTransition>
-      ) : (
+      <ThumbWrapper viewTransition={viewTransition}>
         <Image
           src={imgSrc}
           alt={text}
@@ -45,7 +32,7 @@ const PokeThumbnail = ({
           priority={priority}
           loading={priority ? undefined : "lazy"}
         />
-      )}
+      </ThumbWrapper>
 
       <p>{text}</p>
     </Link>

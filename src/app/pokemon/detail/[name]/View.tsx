@@ -21,7 +21,7 @@ const PokemonDetail = ({ params }: PokemonDetailProps) => {
 
   return (
     <>
-      <MainImage id={id} name={name} />
+      {Boolean(id) && <MainImage id={id} name={name} />}
       <Content
         id={id}
         isError={isError}

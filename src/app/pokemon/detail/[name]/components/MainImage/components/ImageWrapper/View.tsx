@@ -103,19 +103,19 @@ const ImageWrapper = ({ children, id, name }: ImageWrapperProps) => {
         }`}
       >
         {children}
+
+        {(isCatched || catched) && !isCollection && (
+          <div className={styles.catched} title="Already in collection">
+            <Pokeball />
+          </div>
+        )}
+
+        {Boolean(catchTime) && (
+          <div className={styles.throwedPokeball}>
+            <Pokeball />
+          </div>
+        )}
       </div>
-
-      {(isCatched || catched) && !isCollection && (
-        <div className={styles.catched} title="Already in collection">
-          <Pokeball />
-        </div>
-      )}
-
-      {Boolean(catchTime) && (
-        <div className={styles.throwedPokeball}>
-          <Pokeball />
-        </div>
-      )}
 
       {!isCollection && (
         <>

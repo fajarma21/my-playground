@@ -53,7 +53,7 @@
   transition-duration: 250ms;
 }
 
-.imgModifier {
+.imgModifier img {
   transition-delay: 1000ms;
   transform: scale(0);
 }
