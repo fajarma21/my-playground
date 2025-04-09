@@ -14,6 +14,7 @@ const ScrollToTop = ({ display }: ScrollToTopProps) => {
 
   return (
     <button
+      aria-label="scroll to top"
       type="button"
       className={styles.scrollTop}
       data-display={display || undefined}
