@@ -2,7 +2,7 @@ import { POKEMON_API } from "@/app/pokemon/constants/url";
 
 export async function getPokemons() {
   try {
-    const response = await fetch("${POKEMON_API}/pokemon");
+    const response = await fetch(`${POKEMON_API}/pokemon`);
     if (response.ok) return await response.json();
     throw new Error("Not Found");
   } catch (error) {
