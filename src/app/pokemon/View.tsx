@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 
-import useIntersect from "@/utils/useIntersect";
+import useIntersect from "@/hooks/useIntersect";
 import getFirstName from "@/app/pokemon/utils/getFirstName";
 import getImgFromSrc from "@/app/pokemon/utils/getImgFromUrl";
 

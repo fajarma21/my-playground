@@ -6,7 +6,7 @@ import Link from "next/link";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import getCurrentPath from "@/utils/getCurrentPath";
-import useDisplayIntersect from "@/utils/useDisplayIntersect";
+import useDisplayIntersect from "@/hooks/useDisplayIntersect";
 import pokemonLogo from "@/assets/logo-pokemon.png";
 
 import { CatchProvider } from "./contexts/catch";

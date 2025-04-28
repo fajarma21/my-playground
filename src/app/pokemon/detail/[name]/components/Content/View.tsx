@@ -3,7 +3,7 @@
 import React, { MouseEvent, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import useIntersect from "@/utils/useIntersect";
+import useIntersect from "@/hooks/useIntersect";
 import TypeChip from "@/app/pokemon/components/TypeChip";
 import getFirstName from "@/app/pokemon/utils/getFirstName";
 

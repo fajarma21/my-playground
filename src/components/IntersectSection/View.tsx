@@ -1,4 +1,4 @@
-import useDisplayIntersect from "@/utils/useDisplayIntersect";
+import useDisplayIntersect from "@/hooks/useDisplayIntersect";
 import React from "react";
 import styles from "./View.module.css";
 import { IntersectSectionProps } from "./View.types";

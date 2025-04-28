@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 import getLS from "@/utils/getLS";
 import setLS from "@/utils/setLS";
-import useDisplayIntersect from "@/utils/useDisplayIntersect";
+import useDisplayIntersect from "@/hooks/useDisplayIntersect";
 
 import { useCatchContext } from "@/app/pokemon/contexts/catch";
 import { PokeLS } from "@/app/pokemon/types";
