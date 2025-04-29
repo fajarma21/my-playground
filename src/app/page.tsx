@@ -1,16 +1,17 @@
-import { unstable_ViewTransition as ViewTransition } from "react";
+// import { unstable_ViewTransition as ViewTransition } from "react";
 
-import Image from "next/image";
-import Link from "next/link";
+// import Image from "next/image";
+// import Link from "next/link";
 
-import { PAGES } from "./page.constants";
+// import { PAGES } from "./page.constants";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        {PAGES.map(({ path, img }, index) => (
+        test
+        {/* {PAGES.map(({ path, img }, index) => (
           <Link key={`link-${index}`} href={path} className={styles.link}>
             <ViewTransition name={`${path}-logo`}>
               <Image
@@ -23,7 +24,7 @@ export default function Home() {
               />
             </ViewTransition>
           </Link>
-        ))}
+        ))} */}
       </div>
     </div>
   );
