@@ -5,7 +5,14 @@ import { PokemonData } from "@/app/pokemon/types";
 import Content from "./components/Content";
 import { Suspense } from "react";
 
-export const dynamic = "force-dynamic";
+// export async function generateStaticParams() {
+//   const list: PokemonListResult = await getPokemons();
+//   return list.results.map(({ name }) => ({ name }));
+// }
+
+export async function generateStaticParams() {
+  return [];
+}
 
 const PokemonDetail = async ({ params }: PokemonDetailProps) => {
   const { name } = await params;
