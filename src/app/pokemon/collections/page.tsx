@@ -1,11 +1,6 @@
 "use client";
 
-import React, {
-  MouseEvent,
-  useEffect,
-  useState,
-  unstable_ViewTransition as ViewTransition,
-} from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
 import { AnimatePresence, motion } from "framer-motion";
@@ -13,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import getLS from "@/utils/getLS";
 import setLS from "@/utils/setLS";
 import getFirstName from "@/app/pokemon/utils/getFirstName";
+import ThumbWrapper from "../../../components/ThumbWrapper";
 import { COLLECTION_DEFAULT, LS_POKEMON } from "../constants";
 import getPokemonImg from "../utils/getPokemonImg";
 import { EditMode, PokeLS } from "../types";
@@ -121,7 +117,7 @@ const Collections = () => {
                       <div className={styles.releaseIcon} />
                     </button>
                   </div>
-                  <ViewTransition name={`${item.name}-thumbnail`}>
+                  <ThumbWrapper viewTransition={`${item.name}-thumbnail`}>
                     <Image
                       priority
                       src={getPokemonImg(item.id)}
@@ -129,7 +125,7 @@ const Collections = () => {
                       width={100}
                       height={100}
                     />
-                  </ViewTransition>
+                  </ThumbWrapper>
                   <p className={styles.name}>
                     <b>{item.nickname || getFirstName(item.name)}</b>
                   </p>

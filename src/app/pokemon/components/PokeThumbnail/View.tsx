@@ -2,7 +2,7 @@ import React, { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import ThumbWrapper from "./components/ThumbWrapper";
+import ThumbWrapper from "../../../../components/ThumbWrapper";
 import styles from "./View.module.css";
 import { PokeThumbnailProps } from "./View.types";
 

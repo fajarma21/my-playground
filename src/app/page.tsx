@@ -1,19 +1,17 @@
-// import { unstable_ViewTransition as ViewTransition } from "react";
+import ThumbWrapper from "@/components/ThumbWrapper";
+import Image from "next/image";
+import Link from "next/link";
 
-// import Image from "next/image";
-// import Link from "next/link";
-
-// import { PAGES } from "./page.constants";
+import { PAGES } from "./page.constants";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        test
-        {/* {PAGES.map(({ path, img }, index) => (
+        {PAGES.map(({ path, img }, index) => (
           <Link key={`link-${index}`} href={path} className={styles.link}>
-            <ViewTransition name={`${path}-logo`}>
+            <ThumbWrapper viewTransition={`${path}-logo`}>
               <Image
                 priority
                 className={styles.logo}
@@ -22,9 +20,9 @@ export default function Home() {
                 width={212}
                 height={78}
               />
-            </ViewTransition>
+            </ThumbWrapper>
           </Link>
-        ))} */}
+        ))}
       </div>
     </div>
   );

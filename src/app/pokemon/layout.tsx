@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, unstable_ViewTransition as ViewTransition } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import useDisplayIntersect from "@/hooks/useDisplayIntersect";
 import pokemonLogo from "@/assets/logo-pokemon.png";
 
 import { CatchProvider } from "./contexts/catch";
+import ThumbWrapper from "../../components/ThumbWrapper";
 import Header from "./components/Header";
 import ScrollToTop from "./components/ScrollToTop";
 import Pokebag from "./components/Pokebag";
@@ -39,7 +40,7 @@ function PokemonLayout({
         <div className={styles.container}>
           {!intersecting && <Header />}
           <Link href="/pokemon">
-            <ViewTransition name="pokemon-logo">
+            <ThumbWrapper viewTransition="pokemon-logo">
               <Image
                 ref={ref}
                 priority
@@ -49,7 +50,7 @@ function PokemonLayout({
                 height={78}
                 className={styles.titleImg}
               />
-            </ViewTransition>
+            </ThumbWrapper>
           </Link>
           <div className={styles.content}>{children}</div>
           <ScrollToTop display={!intersecting} />

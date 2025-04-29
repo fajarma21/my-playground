@@ -3,6 +3,7 @@ import { getPokemonData, getPokemons } from "./View.helpers";
 import { PokemonDetailProps, PokemonListResult } from "./View.types";
 import { PokemonData } from "@/app/pokemon/types";
 import Content from "./components/Content";
+import { Suspense } from "react";
 
 const PokemonDetail = async ({ params }: PokemonDetailProps) => {
   const { name } = await params;
@@ -11,7 +12,11 @@ const PokemonDetail = async ({ params }: PokemonDetailProps) => {
 
   return (
     <>
-      {Boolean(id) && <MainImage id={id} name={name} />}
+      {Boolean(id) && (
+        <Suspense>
+          <MainImage id={id} name={name} />
+        </Suspense>
+      )}
       <Content
         id={id}
         isError={false}

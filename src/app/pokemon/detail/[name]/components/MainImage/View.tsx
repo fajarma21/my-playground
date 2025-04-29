@@ -1,17 +1,18 @@
 "use client";
 
-import React, { unstable_ViewTransition as ViewTransition } from "react";
+import React from "react";
 import Image from "next/image";
 
 import getPokemonImg from "@/app/pokemon/utils/getPokemonImg";
 
 import ImageWrapper from "./components/ImageWrapper";
 import { MainImageProps } from "./View.types";
+import ThumbWrapper from "@/components/ThumbWrapper";
 
 const MainImage = ({ id, name }: MainImageProps) => {
   return (
     <ImageWrapper id={id} name={name}>
-      <ViewTransition name={`${name}-thumbnail`}>
+      <ThumbWrapper viewTransition={`${name}-thumbnail`}>
         <Image
           priority
           src={getPokemonImg(id)}
@@ -19,7 +20,7 @@ const MainImage = ({ id, name }: MainImageProps) => {
           height={300}
           width={300}
         />
-      </ViewTransition>
+      </ThumbWrapper>
     </ImageWrapper>
   );
 };
