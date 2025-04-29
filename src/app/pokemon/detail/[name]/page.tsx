@@ -1,6 +1,6 @@
 import MainImage from "./components/MainImage";
-import { getPokemonData } from "./View.helpers";
-import { PokemonDetailProps } from "./View.types";
+import { getPokemonData, getPokemons } from "./View.helpers";
+import { PokemonDetailProps, PokemonListResult } from "./View.types";
 import { PokemonData } from "@/app/pokemon/types";
 import Content from "./components/Content";
 import { Suspense } from "react";
@@ -30,6 +30,10 @@ const PokemonDetail = async ({ params }: PokemonDetailProps) => {
   );
 };
 
-export const dynamic = "force-static";
+export const dynamicParams = true;
+export async function generateStaticParams() {
+  const list: PokemonListResult = await getPokemons();
+  return list.results.map(({ name }) => ({ name }));
+}
 
 export default PokemonDetail;
