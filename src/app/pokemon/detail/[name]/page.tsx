@@ -5,11 +5,6 @@ import { PokemonData } from "@/app/pokemon/types";
 import Content from "./components/Content";
 import { Suspense } from "react";
 
-// export async function generateStaticParams() {
-//   const list: PokemonListResult = await getPokemons();
-//   return list.results.map(({ name }) => ({ name }));
-// }
-
 export async function generateStaticParams() {
   return [];
 }
