@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
 
@@ -13,6 +13,7 @@ import { PokeLS } from "@/app/pokemon/types";
 import { COLLECTION_DEFAULT, LS_POKEMON } from "@/app/pokemon/constants";
 import Pokeball from "@/app/pokemon/components/Pokeball";
 
+import CatchedIcon from "./components/CatchedIcon";
 import FloatingBall from "./components/FloatingBall";
 import CatchDialog from "./components/CatchDialog";
 import styles from "./View.module.css";
@@ -36,15 +37,6 @@ const ImageWrapper = ({ children, id, name }: ImageWrapperProps) => {
 
   const isCollection = Boolean(collectionData.id);
   const pokeStorage = useMemo(() => getLS<PokeLS[]>(LS_POKEMON) || [], []);
-  const catched = pokeStorage.some((item) => item.id === id);
-
-  useEffect(() => {
-    const numberCID = Number(cID);
-    if (!Number.isNaN(numberCID)) {
-      const data = pokeStorage.find((item) => item.queue === numberCID);
-      if (data) setCollectionData(data);
-    }
-  }, [cID, pokeStorage]);
 
   const handleCloseDialog = (nickname = "") => {
     setThrowing(false);
@@ -104,10 +96,14 @@ const ImageWrapper = ({ children, id, name }: ImageWrapperProps) => {
       >
         {children}
 
-        {(isCatched || catched) && !isCollection && (
-          <div className={styles.catched} title="Already in collection">
-            <Pokeball />
-          </div>
+        {!isCollection && (
+          <CatchedIcon
+            catchId={cID}
+            display={isCatched}
+            id={id}
+            storage={pokeStorage}
+            handleAddCollection={setCollectionData}
+          />
         )}
 
         {Boolean(catchTime) && (
