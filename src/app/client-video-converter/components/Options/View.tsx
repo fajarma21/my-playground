@@ -1,6 +1,7 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import styles from "./View.module.css";
-import { OptionsProps } from "./View.types";
+import type { ChangeEvent } from 'react';
+import { useRef, useState } from 'react';
+import styles from './View.module.css';
+import type { OptionsProps } from './View.types';
 
 const Options = ({ data, display, onChange }: OptionsProps) => {
   const { duration, frameRate, height, width } = data;
@@ -14,13 +15,13 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
     max?: number
   ) => {
     let value = e.target.value;
-    const onlyDigit = new RegExp(/\d/, "g");
+    const onlyDigit = new RegExp(/\d/, 'g');
     if (!value.match(onlyDigit) || Number(value) <= 0) return;
 
     if (max) value = Number(value) > max ? String(max) : value;
 
-    if (key === "height" || key === "width") {
-      const siblingKey = key === "height" ? "width" : "height";
+    if (key === 'height' || key === 'width') {
+      const siblingKey = key === 'height' ? 'width' : 'height';
       const siblingValue =
         (Number(value) * Number(initData.current[siblingKey])) /
         Number(initData.current[key]);
@@ -39,13 +40,13 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
 
   const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    if (value !== "custom") {
+    if (value !== 'custom') {
       onChange({
         ...data,
         frameRate: e.target.value,
       });
     }
-    setIsCustom(value === "custom");
+    setIsCustom(value === 'custom');
   };
 
   return (
@@ -60,14 +61,14 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
                 id="width"
                 min={1}
                 value={width}
-                onChange={(e) => handleChangeText(e, "width")}
+                onChange={(e) => handleChangeText(e, 'width')}
               />
               <input
                 type="range"
                 min={1}
                 max={Number(initData.current.width) * 2}
                 value={width}
-                onChange={(e) => handleChangeText(e, "width")}
+                onChange={(e) => handleChangeText(e, 'width')}
               />
             </div>
           </section>
@@ -78,7 +79,7 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
               id="height"
               min={1}
               value={height}
-              onChange={(e) => handleChangeText(e, "height")}
+              onChange={(e) => handleChangeText(e, 'height')}
             />
           </section>
           <section>
@@ -93,7 +94,7 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
                 onChange={(e) =>
                   handleChangeText(
                     e,
-                    "duration",
+                    'duration',
                     Number(initData.current.duration)
                   )
                 }
@@ -104,7 +105,7 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
                 max={Number(initData.current.duration)}
                 step={0.1}
                 value={duration}
-                onChange={(e) => handleChangeText(e, "duration")}
+                onChange={(e) => handleChangeText(e, 'duration')}
               />
             </div>
           </section>
@@ -122,7 +123,7 @@ const Options = ({ data, display, onChange }: OptionsProps) => {
                 <input
                   type="number"
                   value={frameRate}
-                  onChange={(e) => handleChangeText(e, "frameRate")}
+                  onChange={(e) => handleChangeText(e, 'frameRate')}
                 />
               )}
             </div>

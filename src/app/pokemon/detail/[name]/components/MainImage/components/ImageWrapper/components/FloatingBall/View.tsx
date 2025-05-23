@@ -1,9 +1,7 @@
-import React from "react";
+import Pokeball from '@/app/pokemon/components/Pokeball';
 
-import Pokeball from "@/app/pokemon/components/Pokeball";
-
-import styles from "./View.module.css";
-import { FloatingBallProps } from "./View.types";
+import styles from './View.module.css';
+import type { FloatingBallProps } from './View.types';
 
 const FloatingBall = ({
   display,

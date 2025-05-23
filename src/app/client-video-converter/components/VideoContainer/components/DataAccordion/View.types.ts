@@ -1,4 +1,4 @@
-import { VideoData } from "@/app/client-video-converter/types";
+import type { VideoData } from '@/app/client-video-converter/types';
 
 export interface DataAccordionProps {
   data: VideoData;

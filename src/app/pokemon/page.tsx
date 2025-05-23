@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import React, { Fragment } from "react";
-import { usePathname } from "next/navigation";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { motion } from "framer-motion";
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useIntersect } from 'fajarma-react-lib';
+import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
+import { Fragment } from 'react';
 
-import useIntersect from "@/hooks/useIntersect";
-import getFirstName from "@/app/pokemon/utils/getFirstName";
-import getImgFromSrc from "@/app/pokemon/utils/getImgFromUrl";
+import getFirstName from '@/app/pokemon/utils/getFirstName';
+import getImgFromSrc from '@/app/pokemon/utils/getImgFromUrl';
 
-import PokeThumbnail from "@/app/pokemon/components/PokeThumbnail";
-import Loader from "@/app/pokemon/components/Loader";
+import Loader from '@/app/pokemon/components/Loader';
+import PokeThumbnail from '@/app/pokemon/components/PokeThumbnail';
 
-import styles from "./View.module.css";
-import { getNextOffset, getPokemonList } from "./View.helpers";
-import { PokemonListData } from "./View.types";
+import { getNextOffset, getPokemonList } from './View.helpers';
+import styles from './View.module.css';
+import type { PokemonListData } from './View.types';
 
 const Pokemon = () => {
   const path = usePathname();
 
   const { data, hasNextPage, isLoading, isError, isFetching, fetchNextPage } =
     useInfiniteQuery<PokemonListData>({
-      queryKey: ["pokemon-list"],
+      queryKey: ['pokemon-list'],
       queryFn: getPokemonList,
       initialPageParam: 0,
       getNextPageParam: (allpage) => getNextOffset(allpage.next),
@@ -29,7 +29,9 @@ const Pokemon = () => {
 
   const { pages = [] } = data || {};
 
-  const { ref } = useIntersect({ callback: () => fetchNextPage() });
+  const { ref } = useIntersect<HTMLDivElement>({
+    callback: () => fetchNextPage(),
+  });
 
   return (
     <>

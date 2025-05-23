@@ -1,27 +1,26 @@
-"use client";
+'use client';
 
-import React, { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
+import getLS from 'fajarma-package/dist/storage/getLS';
+import setLS from 'fajarma-package/dist/storage/setLS';
+import { useIntersect } from 'fajarma-react-lib';
+import { useSearchParams } from 'next/navigation';
+import { useMemo, useState } from 'react';
 
-import getLS from "@/utils/getLS";
-import setLS from "@/utils/setLS";
-import useDisplayIntersect from "@/hooks/useDisplayIntersect";
+import Pokeball from '@/app/pokemon/components/Pokeball';
+import { COLLECTION_DEFAULT, LS_POKEMON } from '@/app/pokemon/constants';
+import { useCatchContext } from '@/app/pokemon/contexts/catch';
+import type { PokeLS } from '@/app/pokemon/types';
 
-import { useCatchContext } from "@/app/pokemon/contexts/catch";
-import { PokeLS } from "@/app/pokemon/types";
-import { COLLECTION_DEFAULT, LS_POKEMON } from "@/app/pokemon/constants";
-import Pokeball from "@/app/pokemon/components/Pokeball";
-
-import CatchedIcon from "./components/CatchedIcon";
-import FloatingBall from "./components/FloatingBall";
-import CatchDialog from "./components/CatchDialog";
-import styles from "./View.module.css";
-import { ImageWrapperProps } from "./View.types";
+import CatchDialog from './components/CatchDialog';
+import CatchedIcon from './components/CatchedIcon';
+import FloatingBall from './components/FloatingBall';
+import styles from './View.module.css';
+import type { ImageWrapperProps } from './View.types';
 
 const ImageWrapper = ({ children, id, name }: ImageWrapperProps) => {
   const searchParams = useSearchParams();
-  const cID = searchParams.get("c");
+  const cID = searchParams.get('c');
 
   const { handleChangeCatchNew } = useCatchContext();
 
@@ -38,7 +37,7 @@ const ImageWrapper = ({ children, id, name }: ImageWrapperProps) => {
   const isCollection = Boolean(collectionData.id);
   const pokeStorage = useMemo(() => getLS<PokeLS[]>(LS_POKEMON) || [], []);
 
-  const handleCloseDialog = (nickname = "") => {
+  const handleCloseDialog = (nickname = '') => {
     setThrowing(false);
     setCatchSuccess(false);
     setDisplayCatch(false);
@@ -78,20 +77,22 @@ const ImageWrapper = ({ children, id, name }: ImageWrapperProps) => {
     }, randomTime);
   };
 
-  const { ref: imgRef, intersecting } = useDisplayIntersect({ threshold: 0.7 });
+  const { ref: imgRef, intersecting } = useIntersect<HTMLImageElement>({
+    options: { threshold: 0.7 },
+  });
 
   return (
     <>
       {isCollection && (
         <div className={styles.collectionRow}>
           <h3>{collectionData.nickname || collectionData.name}</h3>
-          <p>{dayjs(collectionData.time).format("DD/MM/YY/ HH:mm:ss")}</p>
+          <p>{dayjs(collectionData.time).format('DD/MM/YY/ HH:mm:ss')}</p>
         </div>
       )}
       <div
         ref={imgRef}
         className={`${styles.imgWrapper} ${
-          catchTime || catchSuccess ? styles.imgModifier : ""
+          catchTime || catchSuccess ? styles.imgModifier : ''
         }`}
       >
         {children}

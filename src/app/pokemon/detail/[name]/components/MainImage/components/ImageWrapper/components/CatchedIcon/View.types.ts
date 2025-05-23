@@ -1,4 +1,4 @@
-import { PokeLS } from "@/app/pokemon/types";
+import type { PokeLS } from '@/app/pokemon/types';
 
 export interface CatchedIconProps {
   catchId: string | null;

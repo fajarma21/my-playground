@@ -1,10 +1,10 @@
-import {
+import type {
   DimensionData,
   OptionData,
   RateData,
   VideoData,
-} from "@/app/client-video-converter/types";
-import { BASE_MT_URL, BASE_URL } from "./View.constants";
+} from '@/app/client-video-converter/types';
+import { BASE_MT_URL, BASE_URL } from './View.constants';
 
 export const getURLs = (enableMT: boolean) => {
   const baseURL = enableMT ? BASE_MT_URL : BASE_URL;
@@ -16,7 +16,7 @@ export const getURLs = (enableMT: boolean) => {
 };
 
 export const getFileName = (name: string) => {
-  return name.replace(/\.(\w|\d)*$/, "");
+  return name.replace(/\.(\w|\d)*$/, '');
 };
 
 const getError = (source: string, error: string | Event) => {
@@ -24,7 +24,7 @@ const getError = (source: string, error: string | Event) => {
 };
 
 const getExtension = (name: string) => {
-  const splitted = name.split(".");
+  const splitted = name.split('.');
   return splitted[splitted.length - 1];
 };
 
@@ -38,21 +38,21 @@ const getRateData = (url: string, size: number): Promise<RateData> => {
         bitrate: Math.round(bitrate),
       });
     };
-    media.onerror = (error) => reject(getError("getRateData", error));
+    media.onerror = (error) => reject(getError('getRateData', error));
   });
 };
 
 const getDimension = (url: string): Promise<DimensionData> => {
   return new Promise((resolve, reject) => {
-    const video = document.createElement("video");
-    video.setAttribute("src", url);
+    const video = document.createElement('video');
+    video.setAttribute('src', url);
     video.onloadedmetadata = () => {
       resolve({
         width: video.videoWidth,
         height: video.videoHeight,
       });
     };
-    video.onerror = (error) => reject(getError("getDimension", error));
+    video.onerror = (error) => reject(getError('getDimension', error));
   });
 };
 
@@ -75,7 +75,7 @@ export const getData = (file: File): Promise<VideoData> => {
       });
     };
     reader.readAsDataURL(file);
-    reader.onerror = (error) => reject(getError("getData", error));
+    reader.onerror = (error) => reject(getError('getData', error));
   });
 };
 
@@ -92,12 +92,12 @@ export const generateCommand = ({
 }: OptionData) => {
   const command = [];
 
-  if (Number(duration)) command.push(...["-t", duration]);
-  if (Number(frameRate)) command.push(...["-r", frameRate]);
+  if (Number(duration)) command.push(...['-t', duration]);
+  if (Number(frameRate)) command.push(...['-r', frameRate]);
   if (Number(height) && Number(width)) {
     const validW = getValidDimension(Number(width));
     const validH = getValidDimension(Number(height));
-    command.push(...["-s", `${validW}x${validH}`]);
+    command.push(...['-s', `${validW}x${validH}`]);
   }
 
   return command;

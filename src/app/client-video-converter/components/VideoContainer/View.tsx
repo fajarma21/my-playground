@@ -1,9 +1,7 @@
-import React from "react";
+import DataAccordion from './components/DataAccordion';
 
-import DataAccordion from "./components/DataAccordion";
-
-import styles from "./View.module.css";
-import { VideoContainerProps } from "./View.types";
+import styles from './View.module.css';
+import type { VideoContainerProps } from './View.types';
 
 const VideoContainer = ({
   children,

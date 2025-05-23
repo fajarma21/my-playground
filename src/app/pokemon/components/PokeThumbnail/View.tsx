@@ -1,10 +1,10 @@
-import React, { CSSProperties } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
+import type { CSSProperties } from 'react';
 
-import ThumbWrapper from "../../../../components/ThumbWrapper";
-import styles from "./View.module.css";
-import { PokeThumbnailProps } from "./View.types";
+import ThumbWrapper from '../../../../components/ThumbWrapper';
+import styles from './View.module.css';
+import type { PokeThumbnailProps } from './View.types';
 
 const PokeThumbnail = ({
   href,
@@ -12,14 +12,14 @@ const PokeThumbnail = ({
   imgSize,
   priority,
   text,
-  viewTransition = "",
+  viewTransition = '',
   width = 0,
 }: PokeThumbnailProps) => {
   const fullWidth = width + 28;
   const style = {
-    width: width ? fullWidth : "auto",
+    width: width ? fullWidth : 'auto',
     height: width ? fullWidth : 180,
-    "--name-max": `${imgSize}px`,
+    '--name-max': `${imgSize}px`,
   } as CSSProperties;
   return (
     <Link href={href} className={styles.thumbnail} style={style}>
@@ -30,7 +30,7 @@ const PokeThumbnail = ({
           width={imgSize}
           height={imgSize}
           priority={priority}
-          loading={priority ? undefined : "lazy"}
+          loading={priority ? undefined : 'lazy'}
         />
       </ThumbWrapper>
 

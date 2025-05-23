@@ -1,6 +1,5 @@
-import React from "react";
-import styles from "./View.module.css";
-import { PokeballProps } from "./View.types";
+import styles from './View.module.css';
+import type { PokeballProps } from './View.types';
 
 const Pokeball = ({ rotating }: PokeballProps) => {
   return (

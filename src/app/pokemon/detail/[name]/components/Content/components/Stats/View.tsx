@@ -1,9 +1,7 @@
-import React from "react";
+import IntersectSection from '@/components/IntersectSection';
 
-import IntersectSection from "@/components/IntersectSection";
-
-import styles from "./View.module.css";
-import { StatsProps } from "./View.types";
+import styles from './View.module.css';
+import type { StatsProps } from './View.types';
 
 const Stats = ({ stats }: StatsProps) => {
   return (

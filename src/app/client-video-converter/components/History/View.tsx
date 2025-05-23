@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { FaEye } from "react-icons/fa6";
+import { Dialog } from 'fajarma-react-lib';
+import { useState } from 'react';
+import { FaEye } from 'react-icons/fa6';
 
-import { HistoryData } from "@/app/client-video-converter/types";
-import Dialog from "@/components/Dialog";
+import type { HistoryData } from '@/app/client-video-converter/types';
 
-import { getFormattedData } from "./View.helpers";
-import styles from "./View.module.css";
-import { HistoryProps } from "./View.types";
+import { getFormattedData } from './View.helpers';
+import styles from './View.module.css';
+import type { HistoryProps } from './View.types';
 
 const History = ({ list }: HistoryProps) => {
   const [display, setDisplay] = useState(false);

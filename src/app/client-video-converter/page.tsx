@@ -1,36 +1,31 @@
-"use client";
+'use client';
 
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  ChangeEvent,
-  useCallback,
-} from "react";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { FFmpeg } from '@ffmpeg/ffmpeg';
+import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import canUseDOM from 'fajarma-package/dist/dom/canUseDOM';
+import roundNumber from 'fajarma-package/dist/number/roundNumber';
+import type { ChangeEvent } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { FaRegTrashCan } from 'react-icons/fa6';
 
-import {
+import type {
   HistoryData,
   OptionData,
   VideoData,
-} from "@/app/client-video-converter/types";
-import canUseDOM from "@/utils/canUseDOM";
-import getRoundNumber from "@/utils/getRoundNumber";
+} from '@/app/client-video-converter/types';
 
-import Options from "./components/Options";
-import Message from "./components/Message";
-import VideoContainer from "./components/VideoContainer";
-import ConvertContainer from "./components/ConvertContainer";
-import Header from "./components/Header";
-import Loader from "./components/Loader";
-import UploadBtn from "./components/UploadBtn";
-import History from "./components/History";
-import Footer from "./components/Footer";
+import ConvertContainer from './components/ConvertContainer';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import History from './components/History';
+import Loader from './components/Loader';
+import Message from './components/Message';
+import Options from './components/Options';
+import UploadBtn from './components/UploadBtn';
+import VideoContainer from './components/VideoContainer';
 
-import { generateCommand, getData, getFileName, getURLs } from "./View.helpers";
-import styles from "./View.module.css";
+import { generateCommand, getData, getFileName, getURLs } from './View.helpers';
+import styles from './View.module.css';
 
 const ClientVideoConverter = () => {
   const ffmpegRef = useRef<FFmpeg>(null);
@@ -47,11 +42,11 @@ const ClientVideoConverter = () => {
 
   const [options, setOptions] = useState<OptionData>({
     id: 0,
-    height: "",
-    width: "",
-    duration: "",
-    extension: "",
-    frameRate: "",
+    height: '',
+    width: '',
+    duration: '',
+    extension: '',
+    frameRate: '',
   });
 
   const [converting, setConverting] = useState(false);
@@ -65,22 +60,22 @@ const ClientVideoConverter = () => {
   const load = useCallback(async () => {
     const ffmpeg = ffmpegRef.current;
     if (!ffmpeg) return;
-    ffmpeg.on("log", ({ message }) => {
-      if (message.toLowerCase() !== "aborted()") {
+    ffmpeg.on('log', ({ message }) => {
+      if (message.toLowerCase() !== 'aborted()') {
         setMessages((prev) => [...prev, message]);
       }
     });
-    ffmpeg.on("progress", ({ progress: p }) => {
+    ffmpeg.on('progress', ({ progress: p }) => {
       setProgress(p > 100 ? 0 : p * 100);
     });
 
     const { coreURL, wasmURL, workerURL } = getURLs(enableMT);
 
     await ffmpeg.load({
-      coreURL: await toBlobURL(coreURL, "text/javascript"),
-      wasmURL: await toBlobURL(wasmURL, "application/wasm"),
+      coreURL: await toBlobURL(coreURL, 'text/javascript'),
+      wasmURL: await toBlobURL(wasmURL, 'application/wasm'),
       workerURL: workerURL
-        ? await toBlobURL(workerURL, "text/javascript")
+        ? await toBlobURL(workerURL, 'text/javascript')
         : undefined,
     });
     setIsReady(true);
@@ -102,25 +97,25 @@ const ClientVideoConverter = () => {
       await ffmpeg.writeFile(name, await fetchFile(file));
 
       const command = generateCommand(options);
-      await ffmpeg.exec(["-i", name, "-c:a", "copy", ...command, resultName]);
+      await ffmpeg.exec(['-i', name, '-c:a', 'copy', ...command, resultName]);
       const data = await ffmpeg.readFile(resultName);
 
-      if (typeof data !== "string") {
+      if (typeof data !== 'string') {
         const buffer = data.buffer as BlobPart;
         const outputFile = new File([buffer], resultName, {
           type: `video/${extension}`,
         });
 
-        if (outputFile.size < 100) throw new Error("Unknown Error");
+        if (outputFile.size < 100) throw new Error('Unknown Error');
 
         const result = await getData(outputFile);
         setResultData(result);
         setConverting(false);
-        setMessages((prev) => [...prev, "----- finished -----"]);
+        setMessages((prev) => [...prev, '----- finished -----']);
 
         const endTime = performance.now();
         const timeSecond = (endTime - startTime) / 1000;
-        const time = getRoundNumber(timeSecond);
+        const time = roundNumber(timeSecond);
         setFinishTime(time);
         setHistory((prev) => [
           {
@@ -137,7 +132,7 @@ const ClientVideoConverter = () => {
       setMessages((prev) => [
         ...prev,
         `something went wrong: ${error}`,
-        "----- terminated -----",
+        '----- terminated -----',
       ]);
       setIsError(true);
       ffmpegRef.current = new FFmpeg();
@@ -160,8 +155,8 @@ const ClientVideoConverter = () => {
           height: `${result.height}`,
           width: `${result.width}`,
           duration: `${result.duration}`,
-          extension: "mp4",
-          frameRate: "",
+          extension: 'mp4',
+          frameRate: '',
         }));
         setOriginData(result);
       } catch (error) {
@@ -222,7 +217,7 @@ const ClientVideoConverter = () => {
                 onClickRemove={handleRemoveResult}
               >
                 {!resultData && (
-                  <p>{isError ? "Error" : `${Math.round(progress)}%`}</p>
+                  <p>{isError ? 'Error' : `${Math.round(progress)}%`}</p>
                 )}
                 {Boolean(resultData) && (
                   <button

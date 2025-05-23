@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useIntersect } from 'fajarma-react-lib';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 
-import getCurrentPath from "@/utils/getCurrentPath";
-import useDisplayIntersect from "@/hooks/useDisplayIntersect";
-import pokemonLogo from "@/assets/logo-pokemon.png";
+import pokemonLogo from '@/assets/logo-pokemon.png';
+import getCurrentPath from '@/utils/getCurrentPath';
 
-import { CatchProvider } from "./contexts/catch";
-import ThumbWrapper from "../../components/ThumbWrapper";
-import Header from "./components/Header";
-import ScrollToTop from "./components/ScrollToTop";
-import Pokebag from "./components/Pokebag";
-import styles from "./layout.module.css";
-import { usePathname } from "next/navigation";
+import ThumbWrapper from '../../components/ThumbWrapper';
+import Header from './components/Header';
+import Pokebag from './components/Pokebag';
+import ScrollToTop from './components/ScrollToTop';
+import { CatchProvider } from './contexts/catch';
+import styles from './layout.module.css';
 
 const queryClient = new QueryClient();
 
@@ -26,9 +26,9 @@ function PokemonLayout({
 }>) {
   const pathname = usePathname();
   const [catchNew, setCatchNew] = useState(false);
-  const { ref, intersecting } = useDisplayIntersect();
+  const { ref, intersecting } = useIntersect<HTMLImageElement>({});
 
-  const isCollection = getCurrentPath(pathname) === "collections";
+  const isCollection = getCurrentPath(pathname) === 'collections';
 
   const handleChangeCatchNew = (value: boolean) => {
     setCatchNew(value);
@@ -62,7 +62,7 @@ function PokemonLayout({
           )}
           <div className={styles.footer}>
             <p>
-              Powered by{" "}
+              Powered by{' '}
               <a href="https://pokeapi.co/" target="_blank">
                 pokeapi.co
               </a>

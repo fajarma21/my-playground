@@ -1,7 +1,7 @@
-import getRoundNumber from "../getRoundNumber";
+import roundNumber from 'fajarma-package/dist/number/roundNumber';
 
 const twoDigit = (value: number) => {
-  return `${value >= 10 ? "" : "0"}${value}`;
+  return `${value >= 10 ? '' : '0'}${value}`;
 };
 
 const formatTime = (milisecond: number) => {
@@ -18,12 +18,12 @@ const formatTime = (milisecond: number) => {
       m = Math.floor(value / 60000);
       value = value % 60000;
     } else {
-      s = getRoundNumber(value / 1000, 2);
+      s = roundNumber(value / 1000, 2);
       value = 0;
     }
   }
 
-  return twoDigit(h) + ":" + twoDigit(m) + ":" + twoDigit(s);
+  return twoDigit(h) + ':' + twoDigit(m) + ':' + twoDigit(s);
 };
 
 export default formatTime;

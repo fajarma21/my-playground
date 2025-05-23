@@ -1,4 +1,4 @@
-import { OptionData } from "@/app/client-video-converter/types";
+import type { OptionData } from '@/app/client-video-converter/types';
 
 export interface OptionsProps {
   data: OptionData;

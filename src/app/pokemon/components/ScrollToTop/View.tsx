@@ -1,14 +1,12 @@
-import React from "react";
-
-import styles from "./View.module.css";
-import { ScrollToTopProps } from "./View.types";
+import styles from './View.module.css';
+import type { ScrollToTopProps } from './View.types';
 
 const ScrollToTop = ({ display }: ScrollToTopProps) => {
   const handleScrollToTop = () => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   };
 

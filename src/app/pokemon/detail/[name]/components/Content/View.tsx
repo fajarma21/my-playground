@@ -1,19 +1,24 @@
-"use client";
+'use client';
 
-import React, { MouseEvent, useMemo, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
+import { useIntersect } from 'fajarma-react-lib';
+import type { MouseEvent } from 'react';
+import { useMemo, useState } from 'react';
 
-import useIntersect from "@/hooks/useIntersect";
-import TypeChip from "@/app/pokemon/components/TypeChip";
-import getFirstName from "@/app/pokemon/utils/getFirstName";
+import TypeChip from '@/app/pokemon/components/TypeChip';
+import getFirstName from '@/app/pokemon/utils/getFirstName';
 
-import Evolution from "./components/Evolution";
-import Moves from "./components/Moves";
-import Stats from "./components/Stats";
+import Evolution from './components/Evolution';
+import Moves from './components/Moves';
+import Stats from './components/Stats';
 
-import styles from "./View.module.css";
-import { getPokemonSpeciesData, randomDescription } from "./View.helpers";
-import { ContentProps, Description, PokemonSpeciesData } from "./View.types";
+import { getPokemonSpeciesData, randomDescription } from './View.helpers';
+import styles from './View.module.css';
+import type {
+  ContentProps,
+  Description,
+  PokemonSpeciesData,
+} from './View.types';
 
 const Content = ({
   id,
@@ -29,13 +34,13 @@ const Content = ({
 
   const { data: dataSpecies, isLoading: isLoadingSpecies } =
     useQuery<PokemonSpeciesData>({
-      queryKey: ["pokemon-species", [id]],
+      queryKey: ['pokemon-species', [id]],
       queryFn: () => getPokemonSpeciesData(id),
       enabled: Boolean(id),
     });
 
   const { evolution_chain, flavor_text_entries = [] } = dataSpecies || {};
-  const { url = "" } = evolution_chain || {};
+  const { url = '' } = evolution_chain || {};
   const description = useMemo(
     () => randomDescription(flavor_text_entries),
     [flavor_text_entries]
@@ -52,7 +57,9 @@ const Content = ({
     setSelectedDesc(result);
   };
 
-  const { ref } = useIntersect({ callback: () => setLoadEvolution(true) });
+  const { ref } = useIntersect<HTMLDivElement>({
+    callback: () => setLoadEvolution(true),
+  });
 
   if (isError) return <p>Something went wrong... Please try again.</p>;
   if (isLoading || isLoadingSpecies) return <p>Loading...</p>;
@@ -64,7 +71,7 @@ const Content = ({
         <section className={styles.row}>
           {types.map((item, index) => {
             const { type } = item || {};
-            const { name: typeName = "" } = type || {};
+            const { name: typeName = '' } = type || {};
             return (
               <TypeChip key={`type-${index}`} long type={typeName}>
                 {typeName}

@@ -1,29 +1,30 @@
-"use client";
+'use client';
 
-import React, { MouseEvent, useEffect, useState } from "react";
-import Image from "next/image";
-import dayjs from "dayjs";
-import { AnimatePresence, motion } from "framer-motion";
+import dayjs from 'dayjs';
+import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
+import type { MouseEvent } from 'react';
+import { useEffect, useState } from 'react';
 
-import getLS from "@/utils/getLS";
-import setLS from "@/utils/setLS";
-import getFirstName from "@/app/pokemon/utils/getFirstName";
-import ThumbWrapper from "../../../components/ThumbWrapper";
-import { COLLECTION_DEFAULT, LS_POKEMON } from "../constants";
-import getPokemonImg from "../utils/getPokemonImg";
-import { EditMode, PokeLS } from "../types";
+import getFirstName from '@/app/pokemon/utils/getFirstName';
+import getLS from 'fajarma-package/dist/storage/getLS';
+import setLS from 'fajarma-package/dist/storage/setLS';
+import ThumbWrapper from '../../../components/ThumbWrapper';
+import { COLLECTION_DEFAULT, LS_POKEMON } from '../constants';
+import type { EditMode, PokeLS } from '../types';
+import getPokemonImg from '../utils/getPokemonImg';
 
-import OptionDialog from "./components/OptionDialog";
-import EmptyState from "./components/EmptyState";
-import styles from "./View.module.css";
-import Link from "next/link";
+import EmptyState from './components/EmptyState';
+import OptionDialog from './components/OptionDialog';
+import styles from './View.module.css';
 
 const Collections = () => {
   const [data, setData] = useState<PokeLS[]>([]);
   const [selectedData, setSelectedData] = useState<PokeLS>(COLLECTION_DEFAULT);
 
   const [displayDialog, setDisplayDialog] = useState(false);
-  const [dialogMode, setDialogMode] = useState<EditMode>("");
+  const [dialogMode, setDialogMode] = useState<EditMode>('');
 
   const handleOpenEdit = (
     e: MouseEvent<HTMLButtonElement>,
@@ -42,7 +43,7 @@ const Collections = () => {
     setDisplayDialog(false);
   };
 
-  const handleEdit = (value = "") => {
+  const handleEdit = (value = '') => {
     const newData = data.map((item) => {
       if (item.queue === selectedData.queue) {
         return {
@@ -104,7 +105,7 @@ const Collections = () => {
                       type="button"
                       title="Edit"
                       className={styles.btnIcon}
-                      onClick={(e) => handleOpenEdit(e, "edit", item)}
+                      onClick={(e) => handleOpenEdit(e, 'edit', item)}
                     >
                       <div className={styles.editIcon} />
                     </button>
@@ -112,7 +113,7 @@ const Collections = () => {
                       type="button"
                       title="Release"
                       className={styles.btnIcon}
-                      onClick={(e) => handleOpenEdit(e, "release", item)}
+                      onClick={(e) => handleOpenEdit(e, 'release', item)}
                     >
                       <div className={styles.releaseIcon} />
                     </button>
@@ -131,7 +132,7 @@ const Collections = () => {
                   </p>
                   <p>
                     <small>
-                      {dayjs(item.time).format("DD/MM/YY/ HH:mm:ss")}
+                      {dayjs(item.time).format('DD/MM/YY/ HH:mm:ss')}
                     </small>
                   </p>
                 </Link>

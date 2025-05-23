@@ -1,5 +1,5 @@
-import { PokemonData } from "@/app/pokemon/types";
+import type { PokemonData } from '@/app/pokemon/types';
 
 export interface StatsProps {
-  stats: NonNullable<PokemonData["stats"]>;
+  stats: NonNullable<PokemonData['stats']>;
 }

@@ -1,4 +1,4 @@
-import { EditMode } from "@/app/pokemon/types";
+import type { EditMode } from '@/app/pokemon/types';
 
 export interface OptionDialogProps {
   display: boolean;

@@ -1,9 +1,9 @@
-import MainImage from "./components/MainImage";
-import { getPokemonData } from "./View.helpers";
-import { PokemonDetailProps } from "./View.types";
-import { PokemonData } from "@/app/pokemon/types";
-import Content from "./components/Content";
-import { Suspense } from "react";
+import type { PokemonData } from '@/app/pokemon/types';
+import { Suspense } from 'react';
+import Content from './components/Content';
+import MainImage from './components/MainImage';
+import { getPokemonData } from './View.helpers';
+import type { PokemonDetailProps } from './View.types';
 
 const PokemonDetail = async ({ params }: PokemonDetailProps) => {
   const { name } = await params;

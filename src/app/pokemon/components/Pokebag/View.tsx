@@ -1,8 +1,7 @@
-import React from "react";
-import Link from "next/link";
+import Link from 'next/link';
 
-import styles from "./View.module.css";
-import { PokebagProps } from "./View.types";
+import styles from './View.module.css';
+import type { PokebagProps } from './View.types';
 
 const Pokebag = ({ hasNew, onClick }: PokebagProps) => {
   return (

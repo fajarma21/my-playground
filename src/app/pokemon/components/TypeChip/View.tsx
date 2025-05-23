@@ -1,6 +1,5 @@
-import React from "react";
-import styles from "./View.module.css";
-import { TypeChipProps } from "./View.types";
+import styles from './View.module.css';
+import type { TypeChipProps } from './View.types';
 
 const TypeChip = ({ long, type, children }: TypeChipProps) => {
   return (

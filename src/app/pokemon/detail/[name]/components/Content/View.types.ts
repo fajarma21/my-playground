@@ -1,14 +1,14 @@
-import { PokemonData } from "@/app/pokemon/types";
-import { randomDescription } from "./View.helpers";
+import type { PokemonData } from '@/app/pokemon/types';
+import type { randomDescription } from './View.helpers';
 
 export interface ContentProps {
   id: number;
   isError: boolean;
   isLoading: boolean;
-  moves: NonNullable<PokemonData["moves"]>;
+  moves: NonNullable<PokemonData['moves']>;
   name: string;
-  stats: NonNullable<PokemonData["stats"]>;
-  types: NonNullable<PokemonData["types"]>;
+  stats: NonNullable<PokemonData['stats']>;
+  types: NonNullable<PokemonData['types']>;
 }
 
 interface FlavorTextEntries {

@@ -1,13 +1,12 @@
-"use client";
+'use client';
 
-import React from "react";
-import Image from "next/image";
+import Image from 'next/image';
 
-import getPokemonImg from "@/app/pokemon/utils/getPokemonImg";
+import getPokemonImg from '@/app/pokemon/utils/getPokemonImg';
 
-import ImageWrapper from "./components/ImageWrapper";
-import { MainImageProps } from "./View.types";
-import ThumbWrapper from "@/components/ThumbWrapper";
+import ThumbWrapper from '@/components/ThumbWrapper';
+import ImageWrapper from './components/ImageWrapper';
+import type { MainImageProps } from './View.types';
 
 const MainImage = ({ id, name }: MainImageProps) => {
   return (

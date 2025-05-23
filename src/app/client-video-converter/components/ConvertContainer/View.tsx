@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import { FaCircleQuestion } from "react-icons/fa6";
+import { Dialog } from 'fajarma-react-lib';
+import { useState } from 'react';
+import { FaCircleQuestion } from 'react-icons/fa6';
 
-import Dialog from "@/components/Dialog";
-
-import styles from "./View.module.css";
-import { ConvertContainerProps } from "./View.types";
+import styles from './View.module.css';
+import type { ConvertContainerProps } from './View.types';
 
 const ConvertContainer = ({
   converting,
@@ -20,7 +19,7 @@ const ConvertContainer = ({
     setDisplay((prev) => !prev);
   };
 
-  const threadMode = enableMT ? "Multi" : "Single";
+  const threadMode = enableMT ? 'Multi' : 'Single';
 
   return (
     <>
@@ -52,7 +51,7 @@ const ConvertContainer = ({
               className={styles.convertBtn}
               onClick={onClickConvert}
             >
-              {converting ? "" : "Convert"}
+              {converting ? '' : 'Convert'}
             </button>
           )}
         </div>
@@ -69,7 +68,7 @@ const ConvertContainer = ({
         </p>
         <br />
         <p>
-          <b>crossOriginIsolated</b> will allow browser to use{" "}
+          <b>crossOriginIsolated</b> will allow browser to use{' '}
           <b>SharedArrayBuffer</b> which will be used while transcoding. This
           will enable multi-thread transcoding and it makes transcoding faster.
         </p>
@@ -77,7 +76,7 @@ const ConvertContainer = ({
         <p>Otherwise, transcoding progress will proceed at normal speed.</p>
         <br />
         <p>
-          Learn more about <b>crossOriginIsolated</b> and how to enable it{" "}
+          Learn more about <b>crossOriginIsolated</b> and how to enable it{' '}
           <a href="https://web.dev/articles/coop-coep" target="_blank">
             here
           </a>

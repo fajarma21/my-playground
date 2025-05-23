@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { FaCircleInfo } from "react-icons/fa6";
+import { useState } from 'react';
+import { FaCircleInfo } from 'react-icons/fa6';
 
-import { getFormattedData } from "./View.helpers";
-import styles from "./View.module.css";
-import { DataAccordionProps } from "./View.types";
+import { getFormattedData } from './View.helpers';
+import styles from './View.module.css';
+import type { DataAccordionProps } from './View.types';
 
 const DataAccordion = ({ data }: DataAccordionProps) => {
   const { bitrate, dimension, duration, extension, size } =

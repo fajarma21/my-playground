@@ -1,4 +1,4 @@
-import { EvolveList, PokemonEvolutionData } from "./View.types";
+import type { EvolveList, PokemonEvolutionData } from './View.types';
 
 export const getAnyPokemonData = async (url: string) => {
   const response = await fetch(url);
@@ -6,7 +6,7 @@ export const getAnyPokemonData = async (url: string) => {
 };
 
 const mapEvolution = (
-  evolveList: PokemonEvolutionData["chain"][],
+  evolveList: PokemonEvolutionData['chain'][],
   prevIndex = -1,
   newEvolveList: EvolveList[][] = []
 ) => {
@@ -19,8 +19,8 @@ const mapEvolution = (
     const newIndex = prevIndex + 1;
     if (!speciesArr[newIndex]) speciesArr.push([]);
     speciesArr[newIndex].push({
-      name: name || "",
-      url: url || "",
+      name: name || '',
+      url: url || '',
     });
     speciesArr = mapEvolution(evolves_to, newIndex, speciesArr);
   }
@@ -28,7 +28,7 @@ const mapEvolution = (
   return speciesArr;
 };
 
-export const mapChainEvolution = (chain?: PokemonEvolutionData["chain"]) => {
+export const mapChainEvolution = (chain?: PokemonEvolutionData['chain']) => {
   if (chain) return mapEvolution([chain]);
   return [];
 };

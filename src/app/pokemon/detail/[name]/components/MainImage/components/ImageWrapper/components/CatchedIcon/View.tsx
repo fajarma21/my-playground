@@ -1,7 +1,7 @@
-import Pokeball from "@/app/pokemon/components/Pokeball";
-import styles from "./View.module.css";
-import { useEffect } from "react";
-import { CatchedIconProps } from "./View.types";
+import Pokeball from '@/app/pokemon/components/Pokeball';
+import { useEffect } from 'react';
+import styles from './View.module.css';
+import type { CatchedIconProps } from './View.types';
 
 const CatchedIcon = ({
   catchId,

@@ -1,11 +1,10 @@
-import React from "react";
-import Image from "next/image";
+import { Dialog } from 'fajarma-react-lib';
+import Image from 'next/image';
 
-import getPokemonImg from "@/app/pokemon/utils/getPokemonImg";
-import Dialog from "@/components/Dialog";
+import getPokemonImg from '@/app/pokemon/utils/getPokemonImg';
 
-import styles from "./View.module.css";
-import { PokeDialogProps } from "./View.types";
+import styles from './View.module.css';
+import type { PokeDialogProps } from './View.types';
 
 const PokeDialog = ({
   display,

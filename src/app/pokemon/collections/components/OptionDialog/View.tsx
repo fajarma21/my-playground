@@ -1,10 +1,11 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import type { ChangeEvent, FormEvent } from 'react';
+import { useEffect, useState } from 'react';
 
-import Button from "@/app/pokemon/components/Button";
-import Input from "@/app/pokemon/components/Input";
-import PokeDialog from "@/app/pokemon/components/PokeDialog";
+import Button from '@/app/pokemon/components/Button';
+import Input from '@/app/pokemon/components/Input';
+import PokeDialog from '@/app/pokemon/components/PokeDialog';
 
-import { OptionDialogProps } from "./View.types";
+import type { OptionDialogProps } from './View.types';
 
 const OptionDialog = (props: OptionDialogProps) => {
   const { name, nickname, mode, onEdit, onRelease } = props;
@@ -27,7 +28,7 @@ const OptionDialog = (props: OptionDialogProps) => {
 
   return (
     <PokeDialog {...props} name={displayName} subTitle={name}>
-      {mode === "edit" ? (
+      {mode === 'edit' ? (
         <>
           {nickname ? <p>Change the nickname?</p> : <p>Give it nickname?</p>}
           <form id="myform" onSubmit={handleSubmitNickname}>
@@ -35,10 +36,10 @@ const OptionDialog = (props: OptionDialogProps) => {
           </form>
           <Button type="submit" form="myform">
             {nickname && !inputValue
-              ? "Remove the nickname"
+              ? 'Remove the nickname'
               : nickname === inputValue
-              ? "Nope"
-              : "Looks good!"}
+              ? 'Nope'
+              : 'Looks good!'}
           </Button>
         </>
       ) : (

@@ -1,21 +1,21 @@
-"use client";
+'use client';
 
-import { Fragment, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
+import { Fragment, useMemo } from 'react';
 
-import IntersectSection from "@/components/IntersectSection";
-import getFirstName from "@/app/pokemon/utils/getFirstName";
-import PokeThumbnail from "@/app/pokemon/components/PokeThumbnail";
-import getImgFromSrc from "@/app/pokemon/utils/getImgFromUrl";
+import PokeThumbnail from '@/app/pokemon/components/PokeThumbnail';
+import getFirstName from '@/app/pokemon/utils/getFirstName';
+import getImgFromSrc from '@/app/pokemon/utils/getImgFromUrl';
+import IntersectSection from '@/components/IntersectSection';
 
-import { getAnyPokemonData, mapChainEvolution } from "./View.helpers";
-import styles from "./View.module.css";
-import { EvolutionProps, PokemonEvolutionData } from "./View.types";
+import { getAnyPokemonData, mapChainEvolution } from './View.helpers';
+import styles from './View.module.css';
+import type { EvolutionProps, PokemonEvolutionData } from './View.types';
 
 const Evolution = ({ url }: EvolutionProps) => {
   const { data: dataEvolution, isLoading: isLoadingEvolution } =
     useQuery<PokemonEvolutionData>({
-      queryKey: ["pokemon-evolution", [url]],
+      queryKey: ['pokemon-evolution', [url]],
       queryFn: () => getAnyPokemonData(url),
       enabled: Boolean(url),
     });

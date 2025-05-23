@@ -1,6 +1,6 @@
-import React, { useCallback } from "react";
-import styles from "./View.module.css";
-import { MessageProps } from "./View.types";
+import { useCallback } from 'react';
+import styles from './View.module.css';
+import type { MessageProps } from './View.types';
 
 const Message = ({ messages }: MessageProps) => {
   const bottomLine = useCallback(

@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
-import { FaRegFolderOpen } from "react-icons/fa6";
+import { useRef } from 'react';
+import { FaRegFolderOpen } from 'react-icons/fa6';
 
-import { ACCEPTED_VIDEO } from "./View.constants";
-import styles from "./View.module.css";
-import { UploadBtnProps } from "./View.types";
+import { ACCEPTED_VIDEO } from './View.constants';
+import styles from './View.module.css';
+import type { UploadBtnProps } from './View.types';
 
 const UploadBtn = ({ display, onChange }: UploadBtnProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
